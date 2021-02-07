@@ -1,1 +1,25 @@
 <h1>Edit profile</h1>
+
+<form action="/authentication/sign-up" method="POST" enctype="multipart/form-data">
+    <label for="input-name">Name</label>
+    <input type="text" id="input-name" name="name" placeholder="Your Name" required value="{{ user.name }}" />
+
+    <label for="input-profile-picture">Profile Picture</label>
+    <input id="input-profile-picture" type="file" name="profilePicture" accept="image/png, image/jpeg"
+        value="{{ user.profilePicture }}">
+
+    <label for="input-email">Email</label>
+    <input type="email" id="input-email" name="email" placeholder="Your Email" required value="{{ user.email }}" />
+
+    <label for="input-password">Password</label>
+    <input type="password" name="password" id="input-password" placeholder="A Strong Password" required />
+
+    <label for="input-address">Address</label>
+    <input type="text" id="input-address" name="addressStreet" placeholder="Street" value="{{ user.addressStreet }}" />
+    <input type=" number" name="addressHouseNr" placeholder="House number" value="{{ user.addressHouseNr }}" />
+    <input type=" number" name="addressZip" placeholder="Zip code" value="{{ user.addressZip }}" />
+    <input type=" text" name="addressCity" placeholder="City" value="{{ user.addressCity }}" />
+    <input type=" text" name="addressCountry" placeholder="Country" value="{{ user.addressCountry }}" />
+
+    <button>Update the profile</button>
+</form>
