@@ -15,6 +15,18 @@ const schema = new mongoose.Schema({
   },
   passwordHashAndSalt: {
     type: String
+  },
+  addressStreet: {
+    type: String,
+  },
+  addressHouseNr: {
+    type: Number,
+  },
+  addressZip: {
+    type: Number,
+  },
+  addressCountry: {
+    type: String,
   }
 });
 
