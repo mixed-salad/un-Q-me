@@ -7,6 +7,9 @@ const schema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  profilePicture: {
+    type: String, 
+  },
   email: {
     type: String,
     required: true,
