@@ -25,6 +25,9 @@ const schema = new mongoose.Schema({
   addressZip: {
     type: Number,
   },
+  addressCity: {
+    type: String
+  },
   addressCountry: {
     type: String,
   }
