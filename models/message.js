@@ -3,32 +3,22 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  name: {
+  senderId: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
-  email: {
+  receiverId: {
     type: String,
-    required: true,
-    lowercase: true,
-    trim: true
+    trim: true,
+    required: true
   },
-  passwordHashAndSalt: {
-    type: String
-  },
-  addressStreet: {
+  messageBody: {
     type: String,
-  },
-  addressHouseNr: {
-    type: Number,
-  },
-  addressZip: {
-    type: Number,
-  },
-  addressCountry: {
-    type: String,
+    trim: true,
+    required: true
   }
-},
+}, 
 {
   timestamps: {
     createdAt: 'creationDate',
