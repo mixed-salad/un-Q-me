@@ -48,7 +48,7 @@ router.get('/log-in', (req, res, next) => {
   res.render('authentication/log-in');
 });
 
-router.post('/log-in', routeGuard, (req, res, next) => {
+router.post('/log-in', (req, res, next) => {
   let user;
   const data = req.body;
   User.findOne({ email: data.email })
@@ -73,9 +73,9 @@ router.post('/log-in', routeGuard, (req, res, next) => {
     });
 });
 
-router.post('/log-out', routeGuard, (req, res, next) => {
+router.post('/log-out', (req, res, next) => {
   req.session.destroy();
-  res.redirect('authentication/log-in');
+  res.redirect('/authentication/log-in');
 });
 
 module.exports = router;

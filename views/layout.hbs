@@ -15,12 +15,12 @@
     <a href="/user/{{ user._id }}">{{user.name}}'s Profile</a>
     <a href="/post/create">Create a post</a>
 
-    <form action="/authentication/sign-out" method="POST">
-      <button>Sign Out</button>
+    <form action="/authentication/log-out" method="POST">
+      <button>Log Out</button>
     </form>
 
     {{else}}
-    <a href="/authentication/sign-in">Sign In</a>
+    <a href="/authentication/log-in">Log In</a>
     <a href="/authentication/sign-up">Sign Up</a>
     {{/if}}
   </nav>
