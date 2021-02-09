@@ -10,15 +10,17 @@ const routeGuard = require('./../middleware/route-guard');
 
 const router = new Router();
 
-router.get('/sign-up', routeGuard, (req, res, next) => {
-  res.render('sign-up');
+router.get('/sign-up', (req, res, next) => {
+  res.render('authentication/sign-up');
 });
 
-router.post('/sign-up', routeGuard, (req, res, next) => {
+router.post('/sign-up', (req, res, next) => {
   const data = req.body;
+  console.log(data);
+  console.log(data.password);
 
   bcryptjs
-    .hash(password, 10)
+    .hash(data.password, 10)
     .then((hash) => {
       return User.create({
         name: data.name,
@@ -42,8 +44,8 @@ router.post('/sign-up', routeGuard, (req, res, next) => {
     });
 });
 
-router.get('/log-in', routeGuard, (req, res, next) => {
-  res.render('log-in');
+router.get('/log-in', (req, res, next) => {
+  res.render('authentication/log-in');
 });
 
 router.post('/log-in', routeGuard, (req, res, next) => {
@@ -73,7 +75,7 @@ router.post('/log-in', routeGuard, (req, res, next) => {
 
 router.post('/log-out', routeGuard, (req, res, next) => {
   req.session.destroy();
-  res.redirect('/log-in');
+  res.redirect('authentication/log-in');
 });
 
 module.exports = router;
