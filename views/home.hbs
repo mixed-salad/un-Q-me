@@ -1,2 +1,7 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{#each lists}}
+<a href="/list/{{_id}}">
+
+    <h1>{{ storeName }}</h1>
+    <p>{{ itemsNeeded }}</p>
+</a>
+{{/each}}

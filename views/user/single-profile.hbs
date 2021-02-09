@@ -1,1 +1,8 @@
 <h1>{{ user.name }}'s profile</h1>
+
+
+<a href="/user/{{ user._id }}/edit">Edit your profile</a>
+
+<form action="/user/{{ user._id }}/delete" method="POST">
+    <button>Delete your profile</button>
+</form>

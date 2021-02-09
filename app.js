@@ -15,7 +15,7 @@ const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
 // const messageRouter = require('./routes/message');
-// const shopListRouter = require('./routes/shopList');
+const shopListRouter = require('./routes/shopList');
 
 const app = express();
 
@@ -58,7 +58,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/user', userRouter);
-// app.use('/list', shopListRouter);
+app.use('/list', shopListRouter);
 // app.use('/message', messageRouter);
 
 

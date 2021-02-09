@@ -20,8 +20,8 @@ const schema = new mongoose.Schema({
       type: mongoose.Types.ObjectId
   },
   status: {
-      type: String,
-      enum: [pending, offered, accepted, done]
+      type: [String],
+      enum: ["pending", "offered", "accepted", "done"]
   }
 },
 {

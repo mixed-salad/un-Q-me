@@ -46,7 +46,7 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
     //profilePicture: data.profilePicture
     //we still have to decide where to upload the picture and how to
     email: data.email,
-    passwordHashAndSalt: hash,
+    // passwordHashAndSalt: hash,
     addressStreet: data.addressStreet,
     addressHouseNr: data.addressHouseNr,
     addressZip: data.addressZip,
@@ -64,7 +64,7 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
 
 router.post('/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  Resource.findByIdAndDelete(id)
+  User.findByIdAndDelete(id)
     .then(() => {
       res.redirect('/authentication/log-in');
     })

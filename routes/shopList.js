@@ -12,6 +12,7 @@ router.get('/create', routeGuard, (req, res, next) => {
 
 router.post('/create', routeGuard, (req, res, next) => {
   const data = req.body;
+  console.log(req.user._id);
   List.create({
     creator: req.user._id,
     storeName: data.storeName,
@@ -27,14 +28,15 @@ router.post('/create', routeGuard, (req, res, next) => {
 });
 
 router.get('/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
   List.findById(id)
-    .then((post) => {
-      if (post === null) {
-        const error = new Error('Post does not exist.');
+    .then((list) => {
+      if (list === null) {
+        const error = new Error('List does not exist.');
         error.status = 404;
         next(error);
       } else {
-        res.render('list/single-list', { post });
+        res.render('list/single-list', { list });
       }
     })
     .catch((error) => {
@@ -48,8 +50,8 @@ router.get('/:id', routeGuard, (req, res, next) => {
 router.get('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
-    .then((post) => {
-      res.render('resource/edit-list', { post });
+    .then((list) => {
+      res.render('list/edit-list', { list });
     })
     .catch((error) => {
       next(error);
