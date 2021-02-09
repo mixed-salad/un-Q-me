@@ -8,6 +8,7 @@ const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   User.findById(id)
     .then((user) => {
       if (user === null) {
