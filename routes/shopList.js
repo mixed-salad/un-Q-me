@@ -12,12 +12,12 @@ router.get('/create', routeGuard, (req, res, next) => {
 
 router.post('/create', routeGuard, (req, res, next) => {
   const data = req.body;
-  console.log(req.user._id);
+  
   List.create({
     creator: req.user._id,
     storeName: data.storeName,
     itemsNeeded: data.itemsNeeded,
-    status: 'pending'
+    status: 'Pending'
   })
     .then((post) => {
       res.redirect(`/shopList/${post._id}`);
@@ -30,6 +30,7 @@ router.post('/create', routeGuard, (req, res, next) => {
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
+    .populate('creator')
     .then((list) => {
       if (list === null) {
         const error = new Error('List does not exist.');

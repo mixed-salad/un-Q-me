@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
   creator: {
     type: mongoose.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   storeName: {
@@ -17,11 +18,12 @@ const schema = new mongoose.Schema({
     required: true
   }],
   helper: {
-      type: mongoose.Types.ObjectId
+      type: mongoose.Types.ObjectId,
+      ref: 'User'
   },
   status: {
       type: [String],
-      enum: ["pending", "offered", "accepted", "done"]
+      enum: ["Pending", "Offered", "Accepted", "Done"]
   }
 },
 {
