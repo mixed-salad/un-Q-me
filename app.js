@@ -58,7 +58,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/user', userRouter);
-app.use('/list', shopListRouter);
+app.use('/shopList', shopListRouter);
 // app.use('/message', messageRouter);
 
 

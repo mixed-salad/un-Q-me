@@ -7,7 +7,7 @@ const routeGuard = require('../middleware/route-guard');
 const router = new express.Router();
 
 router.get('/create', routeGuard, (req, res, next) => {
-  res.render('list/create-list');
+  res.render('shopList/create-shopList');
 });
 
 router.post('/create', routeGuard, (req, res, next) => {
@@ -20,7 +20,7 @@ router.post('/create', routeGuard, (req, res, next) => {
     status: 'pending'
   })
     .then((post) => {
-      res.redirect(`/list/${post._id}`);
+      res.redirect(`/shopList/${post._id}`);
     })
     .catch((error) => {
       next(error);
@@ -36,7 +36,7 @@ router.get('/:id', routeGuard, (req, res, next) => {
         error.status = 404;
         next(error);
       } else {
-        res.render('list/single-list', { list });
+        res.render('shopList/single-shopList', { list });
       }
     })
     .catch((error) => {
@@ -51,7 +51,7 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
     .then((list) => {
-      res.render('list/edit-list', { list });
+      res.render('shopList/edit-shopList', { list });
     })
     .catch((error) => {
       next(error);
