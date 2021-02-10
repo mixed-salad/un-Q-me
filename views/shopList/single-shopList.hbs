@@ -5,8 +5,8 @@
 <h3>{{ list.storeName }}</h3>
 <h4>{{ list.itemsNeeded }}</h4>
 
-{{#if isVisitor }}
-<form action="" method="POST">
+{{#if isVisitor}}
+<form action="/shopList/{{list._id}}/changestatus" method="POST">
     <button>I can help!</button>
 </form>
 {{else}}

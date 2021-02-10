@@ -37,12 +37,11 @@ router.get('/:id', routeGuard, (req, res, next) => {
         error.status = 404;
         next(error);
       } else {
-        if(req.user._id !== list.creator._id){
-          let isVisitor = true;
-          res.render('shopList/single-shopList', { list, isVisitor });
+        console.log(req.user.name, list.creator.name);
+        if(req.user.name === list.creator.name){
+          res.render('shopList/single-shopList', { list, isVisitor: false });
         } else {
-          isVisitor = false;
-          res.render('shopList/single-shopList', { list, isVisitor })
+          res.render('shopList/single-shopList', { list, isVisitor: true })
         }
       }
     })
