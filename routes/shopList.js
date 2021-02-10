@@ -37,7 +37,13 @@ router.get('/:id', routeGuard, (req, res, next) => {
         error.status = 404;
         next(error);
       } else {
-        res.render('shopList/single-shopList', { list });
+        if(req.user._id !== list.creator._id){
+          let isVisitor = true;
+          res.render('shopList/single-shopList', { list, isVisitor });
+        } else {
+          isVisitor = false;
+          res.render('shopList/single-shopList', { list, isVisitor })
+        }
       }
     })
     .catch((error) => {
