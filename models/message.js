@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   senderId: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
     trim: true,
     required: true
   },
   receiverId: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
     trim: true,
     required: true
   },
@@ -22,8 +24,8 @@ const schema = new mongoose.Schema({
 {
   timestamps: {
     createdAt: 'creationDate',
-    updatedAt: 'UpdateDate'
+    updatedAt: 'updateDate'
   }
 });
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model('Message', schema);

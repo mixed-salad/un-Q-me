@@ -15,12 +15,19 @@ const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
 // const messageRouter = require('./routes/message');
+
+
 const shopListRouter = require('./routes/list');
+const hbs = require('hbs');
+const hbsDateHelper = require('helper-date');
+
 
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+hbs.registerHelper('date', hbsDateHelper);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(

@@ -12,7 +12,7 @@
   <nav>
     <a href="/">Home</a>
     {{#if user}}
-    <a href="/user/{{ user._id }}">{{user.name}}'s Profile</a>
+    <a href="/user/{{ user._id }}">My profile</a>
     <a href="/shopList/create">Create a shopping list</a>
 
     <form action="/authentication/log-out" method="POST">
