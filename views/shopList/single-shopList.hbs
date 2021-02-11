@@ -1,11 +1,13 @@
 <h1>Shopping List details</h1>
-<p>Created by {{ list.creator.name }} on {{{ date creationDate "DD/MM/YYYY" }}} at {{{ date creationDate "HH:mm" }}}</p>
+<p>Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{ date creationDate "DD/MM/YYYY"
+    }}} at {{{ date creationDate "HH:mm" }}}</p>
 <p>Status: <span>{{ list.status }}</span></p>
 
 <h3>{{ list.storeName }}</h3>
 <h4>{{ list.itemsNeeded }}</h4>
 
 {{#if isVisitor}}
+
 {{#if pending}}
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
     <button>I can help!</button>
@@ -20,6 +22,8 @@
 {{else if done}}
 <p>This list has been taken care of.</p>
 {{/if}}
+<a href="/message/{{list.creator._id}}">Message {{ list.creator.name }}</a>
+
 {{else}}
 {{#if pending}}
 <p>Waiting for someone to help you.</p>
