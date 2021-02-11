@@ -13,9 +13,11 @@
     <button>I can help!</button>
 </form>
 {{else if offered}}
-{{!-- {{if helper}} --}}
+{{#if helper}}
+<p>Waiting for {{ list.creator.name }} to respond</p>
+{{else}}
 <p>Offer has been made by {{list.helper.name}}</p>
-{{!-- {{/if}} --}}
+{{/if}}
 {{!-- {{else if accepted}}
 <p>{{list.creator.name}} accepted your offer!</p>
 <a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
@@ -28,9 +30,9 @@
 {{#if pending}}
 <p>Waiting for someone to help you.</p>
 {{else if offered}}
-{{!-- {{if helper}} --}}
+{{#if helper}}
 <p>Offer has been made by {{ list.helper.name }}</p>
-
+{{/if}}
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
     <button>Done!</button>
 </form>
