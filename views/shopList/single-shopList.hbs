@@ -6,7 +6,7 @@
 <h4>{{ list.itemsNeeded }}</h4>
 
 {{#if isVisitor}}
-<form action="/shopList/{{list._id}}/changestatus" method="POST">
+<form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
     <button>I can help!</button>
 </form>
 {{else}}

@@ -79,22 +79,24 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-router.post('/:id/changestatus', routeGuard, (req, res, next) => {
+router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  List.findById(id)
-    .then((list) => {
-      console.log(list);
-      console.log(list.status);
-      switch (list.status) {
-        case 'Pending':
-
-        case 'Offered':
-
-        case 'Accepted':
-  
-      }
-    })
-    .then((listTwo) => {
+  let status = req.params.status;
+  switch (status) {
+    case 'Pending':
+      status = 'Offered';
+      break;
+    case 'Offered':
+      status = 'Accepted';
+      break;
+    case 'Accepted':
+      status = 'Done';
+      break;
+  }
+  List.findByIdAndUpdate(id, {
+    status: status
+  })
+    .then(() => {
       res.redirect(`/shopList/${id}`);
     })
     .catch((error) => {
