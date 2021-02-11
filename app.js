@@ -17,7 +17,7 @@ const userRouter = require('./routes/user');
 // const messageRouter = require('./routes/message');
 
 
-const shopListRouter = require('./routes/list');
+const shopListRouter = require('./routes/shopList');
 const hbs = require('hbs');
 const hbsDateHelper = require('helper-date');
 
@@ -65,7 +65,7 @@ app.use(bindUserToViewLocals);
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
 app.use('/user', userRouter);
-app.use('/list', shopListRouter);
+app.use('/shopList', shopListRouter);
 // app.use('/message', messageRouter);
 
 
