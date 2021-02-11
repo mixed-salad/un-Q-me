@@ -6,10 +6,38 @@
 <h4>{{ list.itemsNeeded }}</h4>
 
 {{#if isVisitor}}
+{{#if pending}}
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
     <button>I can help!</button>
 </form>
+{{else if offered}}
+{{!-- {{if helper}} --}}
+<p>Offer has been made by {{list.helper.name}}</p>
+{{!-- {{/if}} --}}
+{{!-- {{else if accepted}}
+<p>{{list.creator.name}} accepted your offer!</p>
+<a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
+{{else if done}}
+<p>This list has been taken care of.</p>
+{{/if}}
 {{else}}
+{{#if pending}}
+<p>Waiting for someone to help you.</p>
+{{else if offered}}
+{{!-- {{if helper}} --}}
+<p>Offer has been made by {{ list.helper.name }}</p>
+
+<form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
+    <button>Done!</button>
+</form>
+
+{{!-- {{/if}} --}}
+{{!-- {{else if accepted}}
+<p>{{list.creator.name}} accepted your offer!</p>
+<a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
+{{else if done}}
+<p>This list has been taken care of.</p>
+{{/if}}
 <a href="/shopList/{{ list._id }}/edit">Edit the list</a>
 <form action="/shopList/{{ list._id }}/delete" method="POST">
     <button>Delete the list</button>

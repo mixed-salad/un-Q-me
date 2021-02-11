@@ -31,19 +31,35 @@ router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
     .populate('creator')
+    .populate('helper')
     .then((list) => {
       if (list === null) {
         const error = new Error('List does not exist.');
         error.status = 404;
         next(error);
       } else {
-        console.log(req.user._id, list.creator._id);
-        console.log(req.user._id.toString());
-        console.log(list.creator._id.toString());
+        let pending = false
+        let offered = false
+        let accepted = false
+        let done = false
+        switch (list.status) {
+          case 'Pending':
+            pending = true;
+            break;
+          case 'Offered':
+            offered = true;
+            break;
+          case 'Accepted':
+            accepted = true;
+            break;
+          case 'Done':
+            done = true;
+            break;
+        }
         if (req.user._id.toString() === list.creator._id.toString()) {
-          res.render('shopList/single-shopList', { list, isVisitor: false });
+          res.render('shopList/single-shopList', { list, isVisitor: false, pending, offered, accepted, done });
         } else {
-          res.render('shopList/single-shopList', { list, isVisitor: true });
+          res.render('shopList/single-shopList', { list, isVisitor: true, pending, offered, accepted, done});
         }
       }
     })
@@ -86,24 +102,38 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
   let status = req.params.status;
   switch (status) {
     case 'Pending':
-      status = 'Offered';
+      status = 'Offered';  
       break;
     case 'Offered':
-      status = 'Accepted';
-      break;
-    case 'Accepted':
       status = 'Done';
       break;
+    case 'Accepted':
+        status = 'Done';
+        break;
   }
-  List.findByIdAndUpdate(id, {
-    status: status
-  })
-    .then(() => {
-      res.redirect(`/shopList/${id}`);
-    })
-    .catch((error) => {
-      next(error);
-    });
+  if(status === "Offered"){
+        List.findByIdAndUpdate(id, {
+          status: status,
+          helper: req.user._id
+        })
+        .then(list => {
+          res.redirect(`/shopList/${id}`);
+        })
+        .catch(error => {
+          next(error);
+        });  
+      }else{
+        List.findByIdAndUpdate(id, {
+          status: status
+        })
+        .then(() => {
+        res.redirect(`/shopList/${id}`);
+      })
+      .catch((error) => {
+        next(error);
+      });
+
+  }
 });
 
 router.post('/:id/delete', routeGuard, (req, res, next) => {
