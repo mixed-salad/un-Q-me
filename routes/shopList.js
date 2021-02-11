@@ -12,7 +12,7 @@ router.get('/create', routeGuard, (req, res, next) => {
 
 router.post('/create', routeGuard, (req, res, next) => {
   const data = req.body;
-  
+
   List.create({
     creator: req.user._id,
     storeName: data.storeName,
@@ -38,10 +38,10 @@ router.get('/:id', routeGuard, (req, res, next) => {
         next(error);
       } else {
         console.log(req.user.name, list.creator.name);
-        if(req.user.name === list.creator.name){
+        if (req.user.name === list.creator.name) {
           res.render('shopList/single-shopList', { list, isVisitor: false });
         } else {
-          res.render('shopList/single-shopList', { list, isVisitor: true })
+          res.render('shopList/single-shopList', { list, isVisitor: true });
         }
       }
     })
@@ -72,7 +72,7 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
     itemsNeeded: data.itemsNeeded
   })
     .then((list) => {
-      res.redirect(`/list/${id}`);
+      res.redirect(`/shopList/${id}`);
     })
     .catch((error) => {
       next(error);
@@ -83,25 +83,19 @@ router.post('/:id/changestatus', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
     .then((list) => {
+      console.log(list);
+      console.log(list.status);
       switch (list.status) {
-        case 'pending':
-          List.findByIdAndUpdate(id, {
-            status: 'offered'
-          });
+        case 'Pending':
 
-        case 'offered':
-          List.findByIdAndUpdate(id, {
-            status: 'accepted'
-          });
+        case 'Offered':
 
-        case 'accepted':
-          List.findByIdAndUpdate(id, {
-            status: 'done'
-          });
+        case 'Accepted':
+  
       }
     })
-    .then(() => {
-      res.redirect(`/list/${id}`);
+    .then((listTwo) => {
+      res.redirect(`/shopList/${id}`);
     })
     .catch((error) => {
       next(error);

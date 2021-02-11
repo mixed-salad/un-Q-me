@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
       ref: 'User'
   },
   status: {
-      type: [String],
+      type: String,
       enum: ["Pending", "Offered", "Accepted", "Done"]
   }
 },
