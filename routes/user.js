@@ -54,7 +54,7 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
     addressCountry: data.addressCountry
   })
     .then((user) => {
-      res.redirect(`/user/${user._id}`);
+      res.redirect(`/user/${id}`);
     })
     .catch((error) => {
       next(error);

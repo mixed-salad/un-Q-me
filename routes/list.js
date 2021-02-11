@@ -58,6 +58,50 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
+router.post('/:id/edit', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+  List.findByIdAndUpdate(id, {
+    storeName: data.storeName,
+    itemsNeeded: data.itemsNeeded
+  })
+    .then((list) => {
+      res.redirect(`/list/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/:id/changestatus', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  List.findById(id)
+    .then((list) => {
+      switch (list.status) {
+        case 'pending':
+          List.findByIdAndUpdate(id, {
+            status: 'offered'
+          });
+
+        case 'offered':
+          List.findByIdAndUpdate(id, {
+            status: 'accepted'
+          });
+
+        case 'accepted':
+          List.findByIdAndUpdate(id, {
+            status: 'done'
+          });
+      }
+    })
+    .then(() => {
+      res.redirect(`/list/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.post('/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findByIdAndDelete(id)
