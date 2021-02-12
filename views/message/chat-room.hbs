@@ -1,1 +1,15 @@
-<h1>Messages</h1>
+<h1>Messages to {{receiver.name}}</h1>
+{{#each messages}}
+
+<p>{{senderId.name}}: {{messageBody}}</p>
+
+
+{{/each}}
+
+
+
+<form method="POST">
+    <label for="input-message">New Message </label>
+    <textarea id="story" name="message" rows="5" cols="33"> Your message to {{receiver.name}}  </textarea>
+    <button>Send</button>
+</form>

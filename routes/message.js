@@ -2,23 +2,38 @@
 
 const express = require('express');
 const Message = require('./../models/message');
+const User = require('./../models/user');
 const routeGuard = require('./../middleware/route-guard');
 
 const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  res.render('message/chat-room');
-  //find all the messages that have
-  //either id_sender==id && id_receiver==req.user
-  //other id_sender==req.user && id_receiver==id
-  //sort by time
-  //.then(messagesObject =>){
-  //res.render('message/chat-room', messagesObject)
-  //}
-  //.catch(error => {
-  //next(error);
-  //});
+  Message.find({
+    $or:[
+      {$and:[
+        {senderId:{$eq:id}},
+        {receiverId:{$eq:req.user._id}}
+      ]},
+      {$and:[
+        {senderId:{$eq:req.user._id}},
+        {receiverId:{$eq:id}}
+      ]}
+    ]
+  }
+  )
+  .populate('senderId')
+  .populate('receiverId')
+  .then((messages) => {
+    User.findById(id)
+    .then(receiver =>{
+      res.render('message/chat-room', {messages, receiver});
+    } )
+  })
+  .catch((error) => {
+    next(error);
+  });
+
 });
 
 router.post('/:id', routeGuard, (req, res, next) => {
@@ -30,7 +45,7 @@ router.post('/:id', routeGuard, (req, res, next) => {
     messageBody: data.message
   })
     .then((resource) => {
-      res.render('message/chat-room');
+      res.redirect(`/message/${id}`);
     })
     .catch((error) => {
       next(error);
