@@ -29,6 +29,7 @@ router.post('/create', routeGuard, (req, res, next) => {
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
+  let helper = false;
   List.findById(id)
     .populate('creator')
     .populate('helper')
@@ -57,9 +58,13 @@ router.get('/:id', routeGuard, (req, res, next) => {
             break;
         }
         if (req.user._id.toString() === list.creator._id.toString()) {
-          res.render('shopList/single-shopList', { list, isVisitor: false, pending, offered, accepted, done });
+          helper = false;
+          res.render('shopList/single-shopList', { list, isVisitor: false, pending, offered, accepted, done, helper});
         } else {
-          res.render('shopList/single-shopList', { list, isVisitor: true, pending, offered, accepted, done});
+          if(list.helper._id.toString() === req.user._id.toString()){
+            helper = true;
+          }
+          res.render('shopList/single-shopList', { list, isVisitor: true, pending, offered, accepted, done, helper});
         }
       }
     })
