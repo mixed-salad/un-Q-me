@@ -7,24 +7,30 @@ const User = require('./../models/user');
 // CREATE a MIDDLEWARE to upload a picture
 //const uploadMiddleware = require('./../middleware/file-upload');
 const routeGuard = require('./../middleware/route-guard');
+const uploadMiddleware = require('./../middleware/file-upload');
 
 const router = new Router();
+
 
 router.get('/sign-up', (req, res, next) => {
   res.render('authentication/sign-up');
 });
 
-router.post('/sign-up', (req, res, next) => {
+router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, next) => {
   const data = req.body;
-  console.log(data);
-  console.log(data.password);
+  console.log(req.file);
+  let image;
+  if(req.file) {
+    image = req.file.path;
+  }
 
+  
   bcryptjs
     .hash(data.password, 10)
     .then((hash) => {
       return User.create({
         name: data.name,
-        //profilePicture: data.profilePicture
+        profilePicture: image,
         //we still have to decide where to upload the picture and how to
         email: data.email,
         passwordHashAndSalt: hash,

@@ -3,6 +3,9 @@
 
 <a href="/user/{{ user._id }}/edit">Edit your profile</a>
 
+<img src="{{ user.profilePicture }}" alt="{{ user.name }}">
+
+
 <form action="/user/{{ user._id }}/delete" method="POST">
     <button>Delete your profile</button>
 </form>
