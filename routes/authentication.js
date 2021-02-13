@@ -30,6 +30,8 @@ router.post(
       image = req.file.path;
     }
 
+
+
     let latitude;
     let langitude;
 
@@ -68,6 +70,7 @@ router.post(
             req.session.userId = user._id;
             req.user = user;
             res.redirect('/');
+            
           })
           .catch((error) => {
             next(error);
