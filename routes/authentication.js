@@ -44,38 +44,7 @@ router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, ne
     .then((user) => {
       req.session.userId = user._id;
       req.user = user;
-      console.log(process.env.GMAIL_ADDRESS)
-      console.log(process.env.GMAIL_PASSWORD)
-      const transport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            pass: process.env.GMAIL_ADDRESS,
-            user: process.env.GMAIL_PASSWORD
-        }
-      });
-      transport.sendMail({
-        from: process.env.GMAIL_ADDRESS,
-        to: process.env.GMAIL_ADDRESS,
-        subject: 'Welcome',
-        html: `
-          <html>
-              <head>
-              </head>
-              <body>
-              <p>Welcome to unQme</p>
-              </body>        
-          </html>
-          `
-      })
-      .then(result => {
-        console.log('Email was sent');
-        console.log(result);
-        res.redirect('/');
-      })
-      .catch(error => {
-        console.log('There was an error sending email');
-        console.log(error);
-    });
+      res.redirect('/');
     })
     .catch((error) => {
       next(error);
