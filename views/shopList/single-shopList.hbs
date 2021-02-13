@@ -28,12 +28,15 @@
 <p>This list has been taken care of.</p>
 {{/if}}
 
+<a href="/message/{{list.creator._id}}">Message {{ list.creator.name }}</a>
 
 {{else}} {{!-- creator --}}
 {{#if pending}}
 <p>Waiting for someone to help you.</p>
 {{else if offered}}
-<p>Offer has been made by {{ list.helper.name }}</p>
+<p>Offer has been made by <a href="/user/{{list.helper._id}}">{{ list.helper.name }}</a></p>
+<a href="/message/{{list.helper._id}}">Message {{ list.helper.name }}</a>
+
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
     <button>Done!</button>
 </form>
@@ -50,5 +53,3 @@
     <button>Delete the list</button>
 </form>
 {{/if}}
-
-<a href="/message/{{list.creator._id}}">Message {{ list.creator.name }}</a>
