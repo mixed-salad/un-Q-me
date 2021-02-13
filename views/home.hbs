@@ -1,7 +1,7 @@
 <div id="mapid"></div>
 
 <script>
-    let mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    let mymap = L.map('mapid').setView([52.52, 13.405], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -10,6 +10,13 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiaHRlcmF5YW1hIiwiYSI6ImNrbDNrdjV3MzA1ZzQybm13M21mbTR5N2cifQ.gZ60R1xrxGDUUqeDlF-tpg'
     }).addTo(mymap);
+
+    const lists = {{{ json lists }}};
+
+    for (let list of lists) {
+        console.log(list.creator.lat, list.creator.lng);
+        var marker = L.marker([list.creator.lat, list.creator.lng]).addTo(mymap);
+    }
 </script>
 
 {{#each lists}}
