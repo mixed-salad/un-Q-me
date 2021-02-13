@@ -3,5 +3,9 @@
 
     <h1>{{ storeName }}</h1>
     <p>{{ itemsNeeded }}</p>
+    <p>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
+        "DD/MM/YYYY"
+        }}} at {{{ date creationDate "HH:mm" }}}</p>
+    <p>Status: <span>{{ status }}</span></p>
 </a>
 {{/each}}

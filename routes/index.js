@@ -8,6 +8,7 @@ const routeGuard = require('./../middleware/route-guard');
 
 router.get('/', routeGuard, (req, res, next) => {
   List.find()
+  .populate('creator')
   .then( lists => {
     res.render('home', { lists });
 

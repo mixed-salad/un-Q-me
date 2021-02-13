@@ -12,6 +12,7 @@
   <nav>
     <a href="/">Home</a>
     {{#if user}}
+    <span>Hello, {{ user.name }}</span>
     <a href="/user/{{ user._id }}">My profile</a>
     <a href="/shopList/create">Create a shopping list</a>
 

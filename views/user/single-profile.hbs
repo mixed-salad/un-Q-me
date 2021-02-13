@@ -1,9 +1,9 @@
 <h1>{{ user.name }}'s profile</h1>
 
 
+<img src="{{ user.profilePicture }}" alt="{{ user.name }}">
 <a href="/user/{{ user._id }}/edit">Edit your profile</a>
 
-<img src="{{ user.profilePicture }}" alt="{{ user.name }}">
 
 
 <form action="/user/{{ user._id }}/delete" method="POST">
