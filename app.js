@@ -16,7 +16,6 @@ const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
 const messageRouter = require('./routes/message');
 
-
 const shopListRouter = require('./routes/shopList');
 const hbs = require('hbs');
 const hbsDateHelper = require('helper-date');

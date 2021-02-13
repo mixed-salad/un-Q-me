@@ -10,6 +10,7 @@ const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
 
 const router = new Router();
+const axios = require('axios');
 
 
 router.get('/sign-up', (req, res, next) => {
@@ -18,12 +19,24 @@ router.get('/sign-up', (req, res, next) => {
 
 router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, next) => {
   const data = req.body;
-  console.log(req.file);
+  
   let image;
   if(req.file) {
     image = req.file.path;
   }
 
+  let latitude;
+  let langitude;
+  const address = encodeURIComponent(`${data.addressStreet} ${data.addressHouseNr}, ${data.addressZip}, ${data.addressCity}, ${data.addressCountry}`);
+  const acdUrl = `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=fc784150925444589a9d2a8c13654b25`
+  axios.get(acdUrl)
+  .then(result => {
+    latitude = result.results.geometry.lat;
+    langitude = result.results.geometry.lng;
+  })
+  .catch(error => {
+    next(error);
+  });
   
   bcryptjs
     .hash(data.password, 10)
@@ -38,7 +51,9 @@ router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, ne
         addressHouseNr: data.addressHouseNr,
         addressZip: data.addressZip,
         addressCity: data.addressCity,
-        addressCountry: data.addressCountry
+        addressCountry: data.addressCountry,
+        lat: latitude,
+        lng: langitude
       });
     })
     .then((user) => {

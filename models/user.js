@@ -33,6 +33,12 @@ const schema = new mongoose.Schema({
   },
   addressCountry: {
     type: String,
+  },
+  lat: {
+    type: Number
+  },
+  lng: {
+    type: Number
   }
 },
 {
