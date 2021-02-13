@@ -8,9 +8,11 @@ const User = require('./../models/user');
 //const uploadMiddleware = require('./../middleware/file-upload');
 const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
+const dotenv = require('dotenv');
+dotenv.config()
+const nodemailer = require('nodemailer');
 
 const router = new Router();
-
 
 router.get('/sign-up', (req, res, next) => {
   res.render('authentication/sign-up');
@@ -23,8 +25,6 @@ router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, ne
   if(req.file) {
     image = req.file.path;
   }
-
-  
   bcryptjs
     .hash(data.password, 10)
     .then((hash) => {
@@ -43,7 +43,39 @@ router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, ne
     })
     .then((user) => {
       req.session.userId = user._id;
-      res.redirect('/');
+      req.user = user;
+      console.log(process.env.GMAIL_ADDRESS)
+      console.log(process.env.GMAIL_PASSWORD)
+      const transport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            pass: process.env.GMAIL_ADDRESS,
+            user: process.env.GMAIL_PASSWORD
+        }
+      });
+      transport.sendMail({
+        from: process.env.GMAIL_ADDRESS,
+        to: process.env.GMAIL_ADDRESS,
+        subject: 'Welcome',
+        html: `
+          <html>
+              <head>
+              </head>
+              <body>
+              <p>Welcome to unQme</p>
+              </body>        
+          </html>
+          `
+      })
+      .then(result => {
+        console.log('Email was sent');
+        console.log(result);
+        res.redirect('/');
+      })
+      .catch(error => {
+        console.log('There was an error sending email');
+        console.log(error);
+    });
     })
     .catch((error) => {
       next(error);
