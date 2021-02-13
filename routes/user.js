@@ -9,6 +9,8 @@ const router = new express.Router();
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   console.log(id);
+  console.log(req.user._id.toString())
+  let isVisitor = true;
   User.findById(id)
     .then((user) => {
       if (user === null) {
@@ -16,7 +18,15 @@ router.get('/:id', routeGuard, (req, res, next) => {
         error.status = 404;
         next(error);
       } else {
-        res.render('user/single-profile', { user });
+        if (req.user._id.toString() === id ) {
+          console.log(id)
+
+          console.log('before' + isVisitor)
+          isVisitor = false;
+          console.log('after' + isVisitor)
+
+        }
+      res.render('user/single-profile', { user, isVisitor });
       }
     })
     .catch((error) => {
@@ -61,7 +71,6 @@ router.post('/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-
 router.post('/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
   User.findByIdAndDelete(id)
@@ -72,6 +81,5 @@ router.post('/:id/delete', routeGuard, (req, res, next) => {
       next(error);
     });
 });
-
 
 module.exports = router;

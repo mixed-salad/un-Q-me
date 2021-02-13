@@ -29,7 +29,7 @@ router.post('/create', routeGuard, (req, res, next) => {
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  let helper = false;
+  let helper = false; //is user=helper
   List.findById(id)
     .populate('creator')
     .populate('helper')
@@ -39,10 +39,10 @@ router.get('/:id', routeGuard, (req, res, next) => {
         error.status = 404;
         next(error);
       } else {
-        let pending = false
-        let offered = false
-        let accepted = false
-        let done = false
+        let pending = false;
+        let offered = false;
+        let accepted = false;
+        let done = false;
         switch (list.status) {
           case 'Pending':
             pending = true;
@@ -59,12 +59,51 @@ router.get('/:id', routeGuard, (req, res, next) => {
         }
         if (req.user._id.toString() === list.creator._id.toString()) {
           helper = false;
-          res.render('shopList/single-shopList', { list, isVisitor: false, pending, offered, accepted, done, helper});
+          res.render('shopList/single-shopList', {
+            list,
+            isVisitor: false,
+            pending,
+            offered,
+            accepted,
+            done,
+            helper
+          });
         } else {
-          if(list.helper._id.toString() === req.user._id.toString()){
-            helper = true;
+          if (list.helper) {
+            if (list.helper._id.toString() === req.user._id.toString()) {
+              helper = true;
+              res.render('shopList/single-shopList', {
+                list,
+                isVisitor: true,
+                pending,
+                offered,
+                accepted,
+                done,
+                helper
+              });
+            } else {
+              res.render('shopList/single-shopList', {
+                list,
+                isVisitor: true,
+                pending,
+                offered,
+                accepted,
+                done,
+                helper
+              });
+            }
+          } else {
+            helper = false;
+            res.render('shopList/single-shopList', {
+              list,
+              isVisitor: true,
+              pending,
+              offered,
+              accepted,
+              done,
+              helper
+            });
           }
-          res.render('shopList/single-shopList', { list, isVisitor: true, pending, offered, accepted, done, helper});
         }
       }
     })
@@ -107,37 +146,36 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
   let status = req.params.status;
   switch (status) {
     case 'Pending':
-      status = 'Offered';  
+      status = 'Offered';
       break;
     case 'Offered':
       status = 'Done';
       break;
     case 'Accepted':
-        status = 'Done';
-        break;
+      status = 'Done';
+      break;
   }
-  if(status === "Offered"){
-        List.findByIdAndUpdate(id, {
-          status: status,
-          helper: req.user._id
-        })
-        .then(list => {
-          res.redirect(`/shopList/${id}`);
-        })
-        .catch(error => {
-          next(error);
-        });  
-      }else{
-        List.findByIdAndUpdate(id, {
-          status: status
-        })
-        .then(() => {
+  if (status === 'Offered') {
+    List.findByIdAndUpdate(id, {
+      status: status,
+      helper: req.user._id
+    })
+      .then((list) => {
         res.redirect(`/shopList/${id}`);
       })
       .catch((error) => {
         next(error);
       });
-
+  } else {
+    List.findByIdAndUpdate(id, {
+      status: status
+    })
+      .then(() => {
+        res.redirect(`/shopList/${id}`);
+      })
+      .catch((error) => {
+        next(error);
+      });
   }
 });
 

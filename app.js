@@ -16,11 +16,10 @@ const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
 const messageRouter = require('./routes/message');
 
-
 const shopListRouter = require('./routes/shopList');
 const hbs = require('hbs');
 const hbsDateHelper = require('helper-date');
-
+const hbsJson = require('hbs-json');
 
 const app = express();
 
@@ -28,6 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 hbs.registerHelper('date', hbsDateHelper);
+hbs.registerHelper('json', hbsJson);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(

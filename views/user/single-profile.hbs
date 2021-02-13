@@ -4,7 +4,9 @@
 <img src="{{ user.profilePicture }}" alt="{{ user.name }}">
 <a href="/user/{{ user._id }}/edit">Edit your profile</a>
 
-
+{{#if isVisitor}}
+<a href="/message/{{user._id}}">Message {{ user.name }}</a>
+{{/if }}
 
 <form action="/user/{{ user._id }}/delete" method="POST">
     <button>Delete your profile</button>

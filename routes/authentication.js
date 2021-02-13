@@ -9,47 +9,75 @@ const User = require('./../models/user');
 const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
 const dotenv = require('dotenv');
-dotenv.config()
+dotenv.config();
 const nodemailer = require('nodemailer');
 
 const router = new Router();
+const axios = require('axios');
 
 router.get('/sign-up', (req, res, next) => {
   res.render('authentication/sign-up');
 });
 
-router.post('/sign-up', uploadMiddleware.single('profilePicture'), (req, res, next) => {
-  const data = req.body;
-  console.log(req.file);
-  let image;
-  if(req.file) {
-    image = req.file.path;
-  }
-  bcryptjs
-    .hash(data.password, 10)
-    .then((hash) => {
-      return User.create({
-        name: data.name,
-        profilePicture: image,
-        //we still have to decide where to upload the picture and how to
-        email: data.email,
-        passwordHashAndSalt: hash,
-        addressStreet: data.addressStreet,
-        addressHouseNr: data.addressHouseNr,
-        addressZip: data.addressZip,
-        addressCity: data.addressCity,
-        addressCountry: data.addressCountry
+router.post(
+  '/sign-up',
+  uploadMiddleware.single('profilePicture'),
+  (req, res, next) => {
+    const data = req.body;
+
+    let image;
+    if (req.file) {
+      image = req.file.path;
+    }
+
+    let latitude;
+    let langitude;
+
+    const address = encodeURIComponent(
+      `${data.addressStreet} ${data.addressHouseNr}, ${data.addressZip}, ${data.addressCity}, ${data.addressCountry}`
+    );
+    const acdUrl = `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=fc784150925444589a9d2a8c13654b25`;
+
+    axios
+      .get(acdUrl)
+      .then((result) => {
+        latitude = result.data.results[0].geometry.lat;
+        langitude = result.data.results[0].geometry.lng;
+        console.log('inside' + latitude);
+        console.log('inside' + langitude);
+      })
+      .then(() => {
+        bcryptjs
+          .hash(data.password, 10)
+          .then((hash) => {
+            return User.create({
+              name: data.name,
+              profilePicture: image,
+              email: data.email,
+              passwordHashAndSalt: hash,
+              addressStreet: data.addressStreet,
+              addressHouseNr: data.addressHouseNr,
+              addressZip: data.addressZip,
+              addressCity: data.addressCity,
+              addressCountry: data.addressCountry,
+              lat: latitude,
+              lng: langitude
+            });
+          })
+          .then((user) => {
+            req.session.userId = user._id;
+            req.user = user;
+            res.redirect('/');
+          })
+          .catch((error) => {
+            next(error);
+          });
+      })
+      .catch((error) => {
+        next(error);
       });
-    })
-    .then((user) => {
-      req.session.userId = user._id;
-      req.user = user;
-      res.redirect('/');
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+  }
+);
 
 router.get('/log-in', (req, res, next) => {
   res.render('authentication/log-in');
