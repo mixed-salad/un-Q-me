@@ -14,10 +14,13 @@
     const lists = {{{ json lists }}};
 
     for (let list of lists) {
-        console.log(list.creator.lat, list.creator.lng);
         var marker = L.marker([list.creator.lat, list.creator.lng]).addTo(mymap);
+        var popup = marker.bindPopup(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`);
+
+        mymap.on('click', popup);
     }
 </script>
+
 
 {{#each lists}}
 <a href="/shopList/{{_id}}">
