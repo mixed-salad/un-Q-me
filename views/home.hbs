@@ -14,8 +14,13 @@
     const lists = {{{ json lists }}};
 
     for (let list of lists) {
-        var marker = L.marker([list.creator.lat, list.creator.lng]).addTo(mymap);
-        var popup = marker.bindPopup(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`);
+        var circle = L.circle([list.creator.lat, list.creator.lng], {
+            color: '#f03',
+            fillColor: '#f03',
+            fillOpacity: 0.4,
+            radius: 200
+        }).addTo(mymap);
+        var popup = circle.bindPopup(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`);
 
         mymap.on('click', popup);
     }
@@ -30,6 +35,7 @@
     <p>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
         "DD/MM/YYYY"
         }}} at {{{ date creationDate "HH:mm" }}}</p>
+    <p>Zip code: {{ creator.addressZip }}</p>
     <p>Status: <span>{{ status }}</span></p>
 </a>
 {{/each}}
