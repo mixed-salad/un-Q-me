@@ -4,7 +4,8 @@ const express = require('express');
 const User = require('./../models/user');
 const List = require('./../models/shopList');
 const routeGuard = require('./../middleware/route-guard');
-
+const uploadMiddleware = require('../middleware/file-upload');
+const axios = require('axios');
 const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
@@ -65,27 +66,50 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-router.post('/:id/edit', routeGuard, (req, res, next) => {
+router.post('/:id/edit', routeGuard, uploadMiddleware.single('profilePicture'), (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
-  User.findByIdAndUpdate(id, {
-    name: data.name,
-    //profilePicture: data.profilePicture
-    //we still have to decide where to upload the picture and how to
-    email: data.email,
-    // passwordHashAndSalt: hash,
-    addressStreet: data.addressStreet,
-    addressHouseNr: data.addressHouseNr,
-    addressZip: data.addressZip,
-    addressCity: data.addressCity,
-    addressCountry: data.addressCountry
+
+  let image;
+  if(req.file){
+    image = req.file.path;
+  }
+  console.log(image);
+  let latitude;
+  let langitude;
+
+  const address = encodeURIComponent(
+      `${data.addressStreet} ${data.addressHouseNr}, ${data.addressZip}, ${data.addressCity}, ${data.addressCountry}`
+  );
+  const acdUrl = `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=fc784150925444589a9d2a8c13654b25`;
+
+  axios
+  .get(acdUrl)
+  .then((result) => {
+        latitude = result.data.results[0].geometry.lat;
+        langitude = result.data.results[0].geometry.lng;
   })
-    .then((user) => {
-      res.redirect(`/user/${id}`);
-    })
-    .catch((error) => {
-      next(error);
+  .then(() => {
+    return User.findByIdAndUpdate(id, {
+      name: data.name,
+      profilePicture: image,
+      email: data.email,
+      // passwordHashAndSalt: hash,
+      addressStreet: data.addressStreet,
+      addressHouseNr: data.addressHouseNr,
+      addressZip: data.addressZip,
+      addressCity: data.addressCity,
+      addressCountry: data.addressCountry,
+      latitude: latitude,
+      langitude: langitude
     });
+  })
+  .then((user) => {
+      res.redirect(`/user/${id}`);
+  })
+  .catch((error) => {
+      next(error);
+  });
 });
 
 router.post('/:id/delete', routeGuard, (req, res, next) => {
