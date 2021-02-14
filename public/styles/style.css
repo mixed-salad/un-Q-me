@@ -86,7 +86,11 @@ label {
   margin-bottom: 0.5em;
 }
 
-#mapid {
+#map-main {
+  height: 300px;
+}
+
+#map-shopList {
   height: 300px;
 }
 
