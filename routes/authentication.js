@@ -45,8 +45,6 @@ router.post(
       .then((result) => {
         latitude = result.data.results[0].geometry.lat;
         langitude = result.data.results[0].geometry.lng;
-        console.log('inside' + latitude);
-        console.log('inside' + langitude);
       })
       .then(() => {
         bcryptjs

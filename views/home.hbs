@@ -1,7 +1,18 @@
+<p>Find people to help in your neighborhood!</p>
+<form method="GET">
+    <label for="input-city-main">City</label>
+    <input type="search" id="input-city-main" name="cityMain">
+    <label for="input-zip-main">Zip code</label>
+    <input type="search" id="input-zip-main" name="zipMain">
+    <button>Go!</button>
+</form>
+
 <div id="map-main"></div>
 
 <script>
-    let mymap = L.map('map-main').setView([52.52, 13.405], 13);
+    const inputLatitude = {{{ json inputLatitude }}};
+    const inputLangitude = {{{ json inputLangitude }}};
+    let mymap = L.map('map-main').setView([inputLatitude, inputLangitude], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
