@@ -9,11 +9,11 @@ const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  
+  const user = req.user;
   let isVisitor = true;
   let postedLists;
   let helpingLists;
-  let user;
+  let profileUser;
   User.findById(id)
   .then((result) => {
       if (result === null) {
@@ -25,7 +25,7 @@ router.get('/:id', routeGuard, (req, res, next) => {
           isVisitor = false;
         }
       //Get the shop list that the user posted, and also the list that the user is the helper
-        user = result;
+        profileUser = result;
       }
   })
   .then (() => {
@@ -46,7 +46,7 @@ router.get('/:id', routeGuard, (req, res, next) => {
 
   })
   .then(() => {
-     res.render('user/single-profile', { user, isVisitor, postedLists, helpingLists});
+     res.render('user/single-profile', { user, profileUser, isVisitor, postedLists, helpingLists});
   })
   .catch(error => {
      next(error);
