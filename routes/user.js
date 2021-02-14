@@ -2,39 +2,56 @@
 
 const express = require('express');
 const User = require('./../models/user');
+const List = require('./../models/shopList');
 const routeGuard = require('./../middleware/route-guard');
 
 const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
-  console.log(req.user._id.toString())
+  
   let isVisitor = true;
+  let postedLists;
+  let helpingLists;
+  let user;
   User.findById(id)
-    .then((user) => {
-      if (user === null) {
+  .then((result) => {
+      if (result === null) {
         const error = new Error('User does not exist.');
         error.status = 404;
         next(error);
       } else {
         if (req.user._id.toString() === id ) {
-          console.log(id)
-
-          console.log('before' + isVisitor)
           isVisitor = false;
-          console.log('after' + isVisitor)
-
         }
-      res.render('user/single-profile', { user, isVisitor });
+      //Get the shop list that the user posted, and also the list that the user is the helper
+        user = result;
       }
-    })
-    .catch((error) => {
-      if (error.kind === 'ObjectId') {
-        error.status = 404;
-      }
-      next(error);
+  })
+  .then (() => {
+    return List.find({
+       creator: id
+     });
+  })
+  .then(lists => {
+     postedLists = lists;
+  })
+  .then(()=> {
+     return List.find({
+       helper: id
     });
+  })
+  .then((lists) => {
+    helpingLists = lists;
+
+  })
+  .then(() => {
+     res.render('user/single-profile', { user, isVisitor, postedLists, helpingLists});
+  })
+  .catch(error => {
+     next(error);
+  });    
+ 
 });
 
 router.get('/:id/edit', routeGuard, (req, res, next) => {

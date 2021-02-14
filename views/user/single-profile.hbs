@@ -2,6 +2,28 @@
 
 
 <img src="{{ user.profilePicture }}" alt="{{ user.name }}">
+
+{{#if postedLists}}
+<h3>You posted these shopping lists</h3>
+{{#each postedLists}}
+<h4>{{ storeName }}</h4>
+<p>{{ itemsNeeded }}</p>
+<p>Created on {{{ date creationDate "DD/MM/YYYY"}}} at {{{ date creationDate "HH:mm" }}}</p>
+<p>Status: {{ status }}</p>
+{{/each}}
+{{/if}}
+
+{{#if helpingLists}}
+<h3>You offered to help for these lists.</h3>
+{{#each postedLists}}
+<h4>{{ storeName }}</h4>
+<p>{{ itemsNeeded }}</p>
+<p>Created on {{{ date creationDate "DD/MM/YYYY"}}} at {{{ date creationDate "HH:mm" }}}</p>
+<p>Checkout the <a href="/shoplist/{{ _id }}">shopping list</a></p>
+{{/each}}
+{{/if}}
+
+
 <a href="/user/{{ user._id }}/edit">Edit your profile</a>
 
 {{#if isVisitor}}
