@@ -9,7 +9,7 @@
 #log-in-box{
     text-align: left;
     box-sizing: border-box;
-    width: 350px;
+    width: 400px;
 }
 
 
@@ -26,16 +26,15 @@ select,
 .btn-form {
     font: inherit;
     color: inherit;
-    background-color: transparent;
-    border: 1px solid #ccc;
+    border: 2px solid white;
     display: block;
     height: 40px;
     padding: 0 20px;
-    border-radius: 200px;
+    border-radius: 20px;
     background:none;
     &:focus {
         outline: 0 !important;
-        border: 1px solid #ae3c33;
+        border: 1px solid rgb(37,111,63);
 
     }  
 }
@@ -48,6 +47,7 @@ input:not([type='radio']),
 input:not([type='range']){
     font-size: 0.8em;
     width: 100%;
+    cursor: pointer;
 }
 
 
@@ -60,7 +60,7 @@ input[type="file"] {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
-    border-radius: 200px;
+    border-radius: 20px;
 }
 
 

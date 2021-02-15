@@ -1,14 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
 body {
-  max-width: 60em;
-  padding: 0 1em;
+  max-width: 100%;
+  padding: 0 0;
   margin: 0 auto;
-  font-family: sans-serif;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Quicksand';
+  font-weight: 700;
   line-height: 2;
+  background-color: white;
 }
 
 a {
@@ -17,13 +19,21 @@ a {
 }
 
 nav {
-  display: flex;
   position: fixed;
+  margin: 0 0;
+  background-color: inherit;
+  width: 100%;
+  border-bo: 3px solid black;
+}
+
+nav div {
   margin: 0 auto;
-  background-color: white;
+  display: flex;
   width: 60em;
   justify-content: space-between;
-  padding: 0 0;
+  padding: 0 20px;
+  border-radius: 20px;
+  background-color: inherit;
 }
 
 nav ul {
@@ -38,7 +48,7 @@ nav a,
 nav button {
   font: inherit;
   border: 0;
-  background-color: white;
+  background-color: inherit;
   cursor: pointer;
 }
 
@@ -67,9 +77,34 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-img {
+h1 {
+  display: block;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.highlight,
+.highlight-wide {
+  display: block;
+  color: #256f3f;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0px 0px;
+  margin: 0 auto;
+}
+
+.highlight {
+  width: 70%;
+}
+
+.highlight-wide {
+  width: 100%;
+}
+
+img, p {
   width: 100%;
   max-width: 100%;
+  margin-bottom: 10px;
 }
 
 textarea {
@@ -83,31 +118,57 @@ label {
 
 #realbody {
   padding-top: 80px;
+  margin: 0 auto;
+  width: 60em;
+}
+
+section {
+  margin-bottom: 100px;
+}
+
+.section-title {
+  font-size: 3em;
+  color: #d69108;
 }
 
 .two-column-secction {
-  margin-top: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  border-radius: 60% 10% / 10% 60%;
+  padding: 50px 50px;
+  background-color: #efc167;
 }
 
 #place-box {
-  height: 300px;
   width: 200px;
 }
 
 #map-main {
   height: 300px;
-  width: 700px;
+  width: 600px;
+  border-radius: 20px;
+  border: 3px solid white;
+  margin-bottom: 20px;
 }
 
 .centered-text {
   text-align: center;
 }
 
-section {
-  margin-bottom: 30px;
+.orange-bakcground {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  padding: 50px 50px;
+  background-color: #efc167;
+}
+
+.profile-picture {
+  width: 100px;
+  border-radius: 50%;
 }
 
 #map-shopList {
@@ -124,7 +185,7 @@ section {
 #log-in-box {
   text-align: left;
   box-sizing: border-box;
-  width: 350px;
+  width: 400px;
 }
 
 form {
@@ -140,12 +201,11 @@ select,
 .btn-form {
   font: inherit;
   color: inherit;
-  background-color: transparent;
-  border: 1px solid #ccc;
+  border: 2px solid white;
   display: block;
   height: 40px;
   padding: 0 20px;
-  border-radius: 200px;
+  border-radius: 20px;
   background: none;
 }
 
@@ -156,7 +216,7 @@ textarea:focus,
 select:focus,
 .btn-form:focus {
   outline: 0 !important;
-  border: 1px solid #ae3c33;
+  border: 1px solid #256f3f;
 }
 
 select,
@@ -167,6 +227,7 @@ input:not([type='radio']),
 input:not([type='range']) {
   font-size: 0.8em;
   width: 100%;
+  cursor: pointer;
 }
 
 input[type="file"] {
@@ -178,7 +239,7 @@ input[type="file"] {
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
-  border-radius: 200px;
+  border-radius: 20px;
 }
 
 .form-wrapper {
