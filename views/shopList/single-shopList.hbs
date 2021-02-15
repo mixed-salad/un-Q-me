@@ -1,9 +1,19 @@
 <h1>Shopping List details</h1>
-<p>Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{ date creationDate "DD/MM/YYYY"
-    }}} at {{{ date creationDate "HH:mm" }}}</p>
-<p>Status: <span>{{ list.status }}</span></p>
 
-<div id="map-shopList"></div>
+<section class="two-column-secction-shoplist">
+    <div id ="log-in-box">
+        <p>Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{ date creationDate "DD/MM/YYYY"
+            }}} at {{{ date creationDate "HH:mm" }}}</p>
+        <p>Status: <span>{{ list.status }}</span></p>
+
+        <h3>{{ list.storeName }}</h3>
+        <h4>{{ list.itemsNeeded }}</h4>
+    </div>
+
+    <div id="map-shopList"></div>
+
+</section >
+    
 
 <script>
     const list = {{{ json list }}};
@@ -29,39 +39,42 @@
 </script>
 
 
-<h3>{{ list.storeName }}</h3>
-<h4>{{ list.itemsNeeded }}</h4>
 
+<section>
 {{#if isVisitor}}
-
+<p class="centered-text">
+    <a href="/message/{{list.creator._id}}" >Message {{ list.creator.name }}</a>
+</p>
+    
 {{#if pending}}
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
-    <button>I can help!</button>
+    <button class="btn-form">I can help!</button>
 </form>
 {{else if offered}}
 {{#if helper}}
-<p>Waiting for {{ list.creator.name }} to respond</p>
+<p class="centered-text">Waiting for {{ list.creator.name }} to respond</p>
 {{else}}
-<p>Offer has been made by {{list.helper.name}}</p>
+<p class="centered-text">Offer has been made by {{list.helper.name}}</p>
 {{/if}}
 {{!-- {{else if accepted}}
 <p>{{list.creator.name}} accepted your offer!</p>
 <a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
 {{else if done}}
-<p>This list has been taken care of.</p>
+<p class="centered-text">This list has been taken care of.</p>
 {{/if}}
 
-<a href="/message/{{list.creator._id}}">Message {{ list.creator.name }}</a>
+
 
 {{else}} {{!-- creator --}}
+
 {{#if pending}}
-<p>Waiting for someone to help you.</p>
+<p class="centered-text">Waiting for someone to help you.</p>
 {{else if offered}}
-<p>Offer has been made by <a href="/user/{{list.helper._id}}">{{ list.helper.name }}</a></p>
-<a href="/message/{{list.helper._id}}">Message {{ list.helper.name }}</a>
+<p class="centered-text">Offer has been made by <a href="/user/{{list.helper._id}}">{{ list.helper.name }}</a></p>
+
 
 <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
-    <button>Done!</button>
+    <button class="btn-form">Done!</button>
 </form>
 
 {{!-- {{/if}} --}}
@@ -69,10 +82,11 @@
 <p>{{list.creator.name}} accepted your offer!</p>
 <a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
 {{else if done}}
-<p>This list has been taken care of.</p>
+<p class="centered-text">This list has been taken care of.</p>
 {{/if}}
 <a href="/shopList/{{ list._id }}/edit">Edit the list</a>
 <form action="/shopList/{{ list._id }}/delete" method="POST">
     <button>Delete the list</button>
 </form>
 {{/if}}
+</section>

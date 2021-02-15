@@ -1,3 +1,25 @@
+.two-column-secction{
+  margin-top: 50px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+#place-box{
+  height: 300px;
+  width: 200px;
+}
+
 #map-main {
   height: 300px;
+  width: 700px;
 }
+
+.centered-text{
+  text-align: center;
+}
+
+section{
+  margin-bottom: 30px;
+}
+

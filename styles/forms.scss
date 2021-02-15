@@ -1,0 +1,74 @@
+
+#sign-up-box{
+    text-align: left;
+    box-sizing: border-box;
+    width: 350px;
+    text-align: center;
+}
+
+#log-in-box{
+    text-align: left;
+    box-sizing: border-box;
+    width: 350px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+  
+input:not([type='checkbox']),
+input:not([type='radio']),
+input:not([type='range']),
+textarea,
+select,
+.btn-form {
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    display: block;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 200px;
+    background:none;
+    &:focus {
+        outline: 0 !important;
+        border: 1px solid #ae3c33;
+
+    }  
+}
+
+select,
+textarea,
+.btn-picture,
+input:not([type='checkbox']),
+input:not([type='radio']),
+input:not([type='range']){
+    font-size: 0.8em;
+    width: 100%;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 200px;
+}
+
+
+
+
+
+
+.form-wrapper {
+    margin-bottom: 20px;
+
+}

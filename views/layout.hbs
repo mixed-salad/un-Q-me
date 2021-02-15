@@ -16,22 +16,32 @@
 
 <body>
   <nav>
-    <a href="/">Home</a>
-    {{#if user}}
-    <span>Hello, {{ user.name }}</span>
-    <a href="/user/{{ user._id }}">My profile</a>
-    <a href="/shopList/create">Create a shopping list</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+        
 
-    <form action="/authentication/log-out" method="POST">
-      <button>Log Out</button>
-    </form>
+    </ul>
+    <ul>
+      {{#if user}}
+      <li><a href="/user/{{ user._id }}">{{ user.name }}'s profile</a></li>
+      <li><a href="/shopList/create">Create a shopping list</a></li>
+      <li>
+        <form action="/authentication/log-out" method="POST">
+        <button>Log Out</button>
+      </form>
+      </li>
 
-    {{else}}
-    <a href="/authentication/log-in">Log In</a>
-    <a href="/authentication/sign-up">Sign Up</a>
-    {{/if}}
+      
+
+      {{else}}
+      <a href="/authentication/log-in">Log In</a>
+      <a href="/authentication/sign-up">Sign Up</a>
+      {{/if}}
+    </ul>
   </nav>
+  <section id="realbody">
   {{{body}}}
+  </section>
   <script src="/scripts/script.js"></script>
 </body>
 

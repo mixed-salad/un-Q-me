@@ -29,9 +29,9 @@
 <p>Checkout the <a href="/shoplist/{{ _id }}">shopping list</a></p>
 {{/each}}
 {{/if}}
-<a href="/user/{{ profileUser._id }}/edit">Edit your profile</a>
+<p class="centered-text"><a href="/user/{{ profileUser._id }}/edit">Edit your profile</a></p>
 <form action="/user/{{ user._id }}/delete" method="POST">
-    <button>Delete your profile</button>
+    <button class="btn-form">Delete your profile</button>
 </form>
 
 
