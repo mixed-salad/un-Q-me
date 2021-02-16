@@ -487,6 +487,10 @@ input[type="file"] {
   margin-bottom: 0.75rem;
 }
 
+.card .status {
+  display: flax;
+}
+
 .card .status-Pending {
   background-color: #00a3a3;
   padding: 0.3em 1.5em;
