@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
   },
   profilePicture: {
     type: String, 
+    default: 'https://res.cloudinary.com/dshasfnu4/image/upload/v1613421182/rflqat8clopn1qvj4hkq.jpg'
   },
   email: {
     type: String,
