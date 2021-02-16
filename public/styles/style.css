@@ -23,7 +23,7 @@ nav {
   margin: 0 0;
   background-color: inherit;
   width: 100%;
-  border-bo: 3px solid black;
+  z-index: 3;
 }
 
 nav div {
@@ -103,8 +103,6 @@ h1 {
 
 img, p {
   width: 100%;
-  max-width: 100%;
-  margin-bottom: 10px;
 }
 
 textarea {
@@ -120,6 +118,7 @@ label {
   padding-top: 80px;
   margin: 0 auto;
   width: 60em;
+  margin-bottom: 100px;
 }
 
 section {
@@ -131,12 +130,21 @@ section {
   color: #d69108;
 }
 
-.two-column-secction {
+.delete-btn {
+  background-color: #d69108 !important;
+  border: 2px solid #d69108 !important;
+}
+
+.two-column-secction,
+.two-column-secction-shoplist {
   display: flex;
-  justify-content: space-around;
   align-items: center;
   border-radius: 60% 10% / 10% 60%;
   padding: 50px 50px;
+}
+
+.two-column-secction {
+  justify-content: space-around;
   background-color: #efc167;
 }
 
@@ -150,10 +158,11 @@ section {
   border-radius: 20px;
   border: 3px solid white;
   margin-bottom: 20px;
+  z-index: 0;
 }
 
 .centered-text {
-  text-align: center;
+  text-align: center !important;
 }
 
 .orange-bakcground {
@@ -166,13 +175,43 @@ section {
   background-color: #efc167;
 }
 
-.profile-picture {
-  width: 100px;
-  border-radius: 50%;
+.front-logo {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#log-out {
+  border-radius: 60% 10% / 10% 60%;
+  background-color: #256f3f;
+  color: white;
 }
 
 #map-shopList {
   height: 300px;
+  margin: auto auto;
+  z-index: 0;
+}
+
+.two-column-secction-shoplist {
+  background-color: white;
+  border: 3px solid #d69108;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-btn {
+  border: 3px solid #d69108 !important;
+}
+
+.create-list {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #efc167;
+  padding: 50px 50px;
+  border-radius: 60% 10% / 10% 60%;
 }
 
 #sign-up-box {
@@ -219,6 +258,10 @@ select:focus,
   border: 1px solid #256f3f;
 }
 
+.btn-form {
+  margin-bottom: 10px;
+}
+
 select,
 textarea,
 .btn-picture,
@@ -228,6 +271,7 @@ input:not([type='range']) {
   font-size: 0.8em;
   width: 100%;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 input[type="file"] {
@@ -235,7 +279,7 @@ input[type="file"] {
 }
 
 .custom-file-upload {
-  border: 1px solid #ccc;
+  border: 2px solid white;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
@@ -247,8 +291,11 @@ input[type="file"] {
 }
 
 #map-shopList {
-  height: 300px;
-  width: 650px;
+  height: 365px;
+  width: 500px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: 3px solid white;
 }
 
 .two-column-secction-shoplist {
@@ -256,6 +303,215 @@ input[type="file"] {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 235px;
+  max-width: 350px;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 3px solid #ecad30;
+  border-radius: 20px;
+  margin-right: 5px;
+}
+
+.card > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.card > .list-group {
+  border-top: inherit;
+  border-bottom: inherit;
+}
+
+.card > .list-group:first-child {
+  border-top-width: 0;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card > .list-group:last-child {
+  border-bottom-width: 0;
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+.card > .card-header + .list-group,
+.card > .list-group + .card-footer {
+  border-top: 0;
+}
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+  margin-top: -0.375rem;
+  margin-bottom: 0;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+.card-link + .card-link {
+  margin-left: 1.25rem;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
+
+.card-header-tabs {
+  margin-right: -0.625rem;
+  margin-bottom: -0.75rem;
+  margin-left: -0.625rem;
+  border-bottom: 0;
+}
+
+.card-header-pills {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+  border-radius: calc(0.25rem - 1px);
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-img,
+.card-img-bottom {
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+.card-deck .card {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 576px) {
+  .card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .card-deck .card {
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+  }
+}
+
+.card-group > .card {
+  margin-bottom: 100px;
+}
+
+@media (min-width: 576px) {
+  .card-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  .card-group > .card {
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    margin-bottom: 0;
+  }
+  .card-group > .card + .card {
+    margin-left: 0;
+    border-left: 0;
+  }
+}
+
+.card-columns .card {
+  margin-bottom: 0.75rem;
+}
+
+#message {
+  border: 1px;
+  border: 3px solid #d69108;
+}
+
+#send {
+  border: 3px solid #256f3f;
+}
+
+.profile-picture {
+  margin-right: 2em;
+  width: 20em;
+  height: 20em;
+  border-radius: 60% 10% / 10% 60%;
+  object-fit: cover;
+}
+
+#edit-profile {
+  border-radius: 55% 8% / 8% 55%;
+  padding: 50px 50px;
+  background-color: #efc167;
+}
+
+#input-profile-picture {
+  border: 3px solid white;
 }
 
 /*# sourceMappingURL=style.css.map */

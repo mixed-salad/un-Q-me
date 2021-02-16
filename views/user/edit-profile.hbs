@@ -1,13 +1,13 @@
-<h1>Edit profile</h1>
+<h1 class="section-title centered-text">Edit profile</h1>
 
-<form method="POST" enctype="multipart/form-data">
+<form id="edit-profile" method="POST" enctype="multipart/form-data">
     <label for="input-name">Name</label>
     <input type="text" id="input-name" name="name" placeholder="Your Name" required value="{{ user.name }}" />
 
     <label for="input-profile-picture" class="custom-file-upload">Change Profile Picture</label>
-    <img src="{{ user.profilePicture }}" alt="{{ user.name }}">
+    <img class="profile-picture" src="{{ user.profilePicture }}" alt="{{ user.name }}">
     <small>Your current profile picture</small>
-    <input id="input-profile-picture" type="file" name="profilePicture" accept="image/png, image/jpeg" />
+    <input  id="input-profile-picture" type="file" name="profilePicture" accept="image/png, image/jpeg" />
 
     <label for="input-email">Email</label>
     <input type="email" id="input-email" name="email" placeholder="Your Email" required value="{{ user.email }}" />

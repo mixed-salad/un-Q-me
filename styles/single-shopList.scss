@@ -1,3 +1,28 @@
 #map-shopList {
   height: 300px;
+  margin: auto auto;
+  z-index: 0
+
+}
+
+.two-column-secction-shoplist{
+  background-color:white;
+  border: 3px solid $darkorange;
+  justify-content: center;
+  align-items:center;
+}
+
+.list-btn{
+  border: 3px solid $darkorange !important;
+}
+
+.create-list{
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $lightorange;
+  padding: 50px 50px;
+  border-radius: 60% 10% / 10% 60%;
 }

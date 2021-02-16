@@ -53,16 +53,24 @@
     }
 </script>
 
+<div class="card-group">    
+    {{#each lists}}
+    <a href="/shopList/{{_id}}">
 
-{{#each lists}}
-<a href="/shopList/{{_id}}">
-
-    <h1>{{ storeName }}</h1>
-    <p>{{ itemsNeeded }}</p>
-    <p>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
-        "DD/MM/YYYY"
-        }}} at {{{ date creationDate "HH:mm" }}}</p>
-    <p>Zip code: {{ creator.addressZip }}</p>
-    <p>Status: <span>{{ status }}</span></p>
-</a>
-{{/each}}
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">{{ storeName }}</h1>
+                <article class="card-text">
+                    <p>Zip code: {{ creator.addressZip }}</p>
+                    <p>{{ itemsNeeded }}</p>
+                    <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
+                        "DD/MM/YYYY"
+                        }}} at {{{ date creationDate "HH:mm" }}}</small>
+                    
+                    <p>Status: <span>{{ status }}</span></p>
+                </article>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

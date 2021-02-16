@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>UnQ Me {{#if title}}- {{title}}{{/if}}</title>
+
   <link rel="stylesheet" href="/styles/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -18,9 +19,9 @@
   <nav>
     <div>
       <ul>
-        <li><a href="/">Home</a></li>
-          
-
+        <li>
+          <a href="/">Home</a>
+        </li>
       </ul>
       <ul>
         {{#if user}}
@@ -28,7 +29,7 @@
         <li><a href="/shopList/create">Create a shopping list</a></li>
         <li>
           <form action="/authentication/log-out" method="POST">
-          <button>Log Out</button>
+          <button id="log-out">Log Out</button>
         </form>
         </li>
 
@@ -43,6 +44,9 @@
     
   </nav>
   <section id="realbody">
+    <div class="front-logo">
+      <img src="/images/unqme_logo2.png" alt="unQme" />
+    </div>  
   {{{body}}}
   </section>
   <script src="/scripts/script.js"></script>

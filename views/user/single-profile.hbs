@@ -1,28 +1,53 @@
-<h1>{{ profileUser.name }}'s profile</h1>
+<h1 class="section-title centered-text">{{ profileUser.name }}'s profile</h1>
 
-<div class= "profile-picture">
-<img src="{{ profileUser.profilePicture }}" alt="{{ profileUser.name }}">
-</div>
+<section class="two-column-secction">
+    <img class= "profile-picture" src="{{ profileUser.profilePicture }}" alt="{{ profileUser.name }}">
+    <div>
+        {{#if isVisitor}}
+        <a class="centered-text btn-form" href="/message/{{profileUser._id}}">Message {{ profileUser.name }}</a>
+        {{else}}
+        <p>Name: {{profileUser.name}}</p>
+        <p>Adress: {{profileUser.addressStreet}} {{profileUser.addressHouseNr}}, {{profileUser.addressZip}} {{profileUser.addressCity}}, {{profileUser.addressCountry}}  </p>
+        <p>Email: {{profileUser.email}} </p>
+        <p class="centered-text btn-form"><a href="/user/{{ profileUser._id }}/edit">Edit your profile</a></p>
+        {{/if}}
+    </div>
+</section>
+
 
 
 
 
 
 {{#if isVisitor}}
-<a href="/message/{{profileUser._id}}">Message {{ profileUser.name }}</a>
+
 {{else}}
 {{#if postedLists}}
-<h3>You posted these shopping lists</h3>
-{{#each postedLists}}
-<h4>{{ storeName }}</h4>
-<p>{{ itemsNeeded }}</p>
-<p>Created on {{{ date creationDate "DD/MM/YYYY"}}} at {{{ date creationDate "HH:mm" }}}</p>
-<p>Status: {{ status }}</p>
-{{/each}}
+<h3 class="section-title centered-text">You posted these shopping lists</h3>
+<div class="card-group"> 
+    {{#each postedLists}}
+    <a href="/shopList/{{_id}}">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">{{ storeName }}</h1>
+                    <article class="card-text">
+                        <p>Zip code: {{ creator.addressZip }}</p>
+                        <p>{{ itemsNeeded }}</p>
+                        <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
+                            "DD/MM/YYYY"
+                            }}} at {{{ date creationDate "HH:mm" }}}</small>
+                        
+                        <p>Status: <span>{{ status }}</span></p>
+                    </article>
+                </div>
+            </div>
+        </a>
+    {{/each}}
+</div>
 {{/if}}
 
 {{#if helpingLists}}
-<h3>You offered to help for these lists.</h3>
+<h3 class="section-title centered-text">You offered to help for these lists.</h3>
 {{#each postedLists}}
 <h4>{{ storeName }}</h4>
 <p>{{ itemsNeeded }}</p>
@@ -30,8 +55,5 @@
 <p>Checkout the <a href="/shoplist/{{ _id }}">shopping list</a></p>
 {{/each}}
 {{/if}}
-<p class="centered-text"><a href="/user/{{ profileUser._id }}/edit">Edit your profile</a></p>
-
-
 
 {{/if }}

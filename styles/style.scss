@@ -39,7 +39,7 @@ nav {
   margin: 0 0;
   background-color: inherit;
   width: 100%;
-  border-bo: 3px solid black;
+  z-index: 3;
 
 
   div{
@@ -110,8 +110,6 @@ h1 {
 
 img, p {
   width: 100%;
-  max-width: 100%;
-  margin-bottom: 10px;
 }
 
 
@@ -128,6 +126,7 @@ label {
   padding-top: 80px;
   margin: 0 auto;
   width: 60em;
+  margin-bottom: 100px;
 
 }
 
@@ -140,9 +139,18 @@ section{
   color: $darkorange
 }
 
+.delete-btn{
+  background-color: $darkorange !important;
+  border: 2px solid $darkorange !important;
+}
+
 
 
 @import 'main';
 @import 'single-shopList';
 @import 'forms';
 @import 'shop-list';
+@import 'cards';
+@import 'message';
+@import 'profile';
+

@@ -1,10 +1,14 @@
-.two-column-secction{
+.two-column-secction,
+.two-column-secction-shoplist{
   display:flex;
-  justify-content: space-around;
   align-items:center;
-  border-radius: 60% 10% / 10% 60%;;
-  padding: 50px 50px;
-  background-color: rgb(239,193,103);
+  border-radius: 60% 10% / 10% 60%;
+  padding: 50px 50px;  
+}
+
+.two-column-secction{
+  justify-content: space-around;
+  background-color:$lightorange;
 }
 
 #place-box{
@@ -15,12 +19,13 @@
   height: 300px;
   width: 600px;
   border-radius: 20px;
-  border: 3px solid white;;
+  border: 3px solid white;
   margin-bottom: 20px;
+  z-index: 0
 }
 
 .centered-text{
-  text-align: center;
+  text-align: center !important;
 }
 
 .orange-bakcground{
@@ -33,9 +38,15 @@
   background-color: rgb(239,193,103);
 }
 
-.profile-picture{
-  width: 100px;
-  border-radius: 50%
+
+
+.front-logo{
+  width:200px;
+  margin: 0 auto;
 }
 
-
+#log-out{
+  border-radius: 60% 10% / 10% 60%;
+  background-color: $darkgreen;
+  color: white
+}
