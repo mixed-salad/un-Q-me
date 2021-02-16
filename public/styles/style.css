@@ -487,6 +487,27 @@ input[type="file"] {
   margin-bottom: 0.75rem;
 }
 
+.card .status-Pending {
+  background-color: #00a3a3;
+  padding: 0.3em 1.5em;
+  border-radius: 20%;
+  margin: 0 1em;
+}
+
+.card .status-Offered {
+  background-color: #ffbb00;
+  padding: 0.3em 0.8em;
+  border-radius: 20% 10%;
+  margin: 0 1em !important;
+}
+
+.card .status-Done {
+  background-color: #ff004c;
+  padding: 0.3em 1.5em;
+  border-radius: 20%;
+  margin: 0 1em;
+}
+
 #message {
   border: 1px;
   border: 3px solid #d69108;

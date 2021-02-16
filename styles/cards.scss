@@ -12,7 +12,6 @@
   border: 3px solid $logoorange;
   border-radius: 20px;
   margin-right: 5px;
-  
 }
 
 .card > hr {
@@ -179,4 +178,23 @@
 
 .card-columns .card {
   margin-bottom: 0.75rem;
+}
+
+.card .status-Pending {
+  background-color: rgb(0, 163, 163);
+  padding: 0.3em 1.5em;
+  border-radius: 20%;
+  margin: 0 1em;
+}
+.card .status-Offered {
+  background-color: rgb(255, 187, 0);
+  padding: 0.3em 0.8em;
+  border-radius: 20% 10%;
+  margin: 0 1em;
+}
+.card .status-Done {
+  background-color: rgb(255, 0, 76);
+  padding: 0.3em 1.5em;
+  border-radius: 20%;
+  margin: 0 1em;
 }
