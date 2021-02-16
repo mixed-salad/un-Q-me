@@ -3,6 +3,9 @@
 const express = require('express');
 const List = require('../models/shopList');
 const routeGuard = require('../middleware/route-guard');
+const transport = require('./../middleware/transport');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const router = new express.Router();
 
@@ -160,11 +163,76 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
       status: status,
       helper: req.user._id
     })
+      .then(() => {
+        return List.findById(id).populate('creator').populate('helper');
+      })
       .then((list) => {
-        res.redirect(`/shopList/${id}`);
+        transport
+          .sendMail({
+            from: process.env.GMAIL_ADDRESS,
+            to: process.env.GMAIL_ADDRESS,
+            subject: `${list.helper.name} wants to help you`,
+            html: `
+              <html>
+                  <head>
+                  </head>
+                  <body>
+                  <h1>Hi, ${list.creator.name}!</h1>
+                  <p>${list.helper.name} wants to help you with your shopping list in ${list.storeName}.</p>
+                  <p>If you want to accept the help, message ${list.helper.name} <a href="http://localhost:3000/message/${list.helper._id}">here</a>.</p>
+                  </body>        
+              </html>
+              `
+          })
+          .then((result) => {
+            console.log('Email was sent');
+            console.log(result);
+            res.redirect(`/shopList/${id}`);
+          })
+          .catch((error) => {
+            console.log('There was an error sending email');
+            console.log(error);
+          });
       })
       .catch((error) => {
         next(error);
+      });
+  } else if (status === 'Done') {
+    List.findByIdAndUpdate(id, {
+      status: status,
+      helper: req.user._id
+    })
+      .then(() => {
+        return List.findById(id).populate('creator').populate('helper');
+      })
+      .then((list) => {
+        transport
+          .sendMail({
+            from: process.env.GMAIL_ADDRESS,
+            to: process.env.GMAIL_ADDRESS,
+            subject: `${list.creator.name} wants to thank you`,
+            html: `
+              <html>
+                  <head>
+                  </head>
+                  <body>
+                  <h1>Hi, ${list.helper.name}!</h1>
+                  <p>${list.creator.name} wants to thank you for your help with the shopping list in ${list.storeName}.</p>
+                  <p>Message ${list.creator.name} <a href="http://localhost:3000/message/${list.creator._id}">here</a>.</p>
+                  <p>Come back and help or get helped in <a href="http://localhost:3000/">unQme</a>  </a>.</p>
+                  </body>        
+              </html>
+              `
+          })
+          .then((result) => {
+            console.log('Email was sent');
+            console.log(result);
+            res.redirect(`/shopList/${id}`);
+          })
+          .catch((error) => {
+            console.log('There was an error sending email');
+            console.log(error);
+          });
       });
   } else {
     List.findByIdAndUpdate(id, {

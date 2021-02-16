@@ -8,6 +8,7 @@ const User = require('./../models/user');
 //const uploadMiddleware = require('./../middleware/file-upload');
 const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
+const transport = require('./../middleware/transport');
 const dotenv = require('dotenv');
 dotenv.config();
 const nodemailer = require('nodemailer');
@@ -29,8 +30,6 @@ router.post(
     if (req.file) {
       image = req.file.path;
     }
-
-
 
     let latitude;
     let langitude;
@@ -67,8 +66,31 @@ router.post(
           .then((user) => {
             req.session.userId = user._id;
             req.user = user;
-            res.redirect('/');
-            
+            transport
+              .sendMail({
+                from: process.env.GMAIL_ADDRESS,
+                to: process.env.GMAIL_ADDRESS,
+                subject: `Welcome to unQme, ${user.name}`,
+                html: `
+                <html>
+                    <head>
+                    </head>
+                    <body>
+                    <h1>Hi, ${user.name}! Welcome to unQme</h1>
+                    <p>Log in <a href="http://localhost:3000/authentication/log-in">here.</a></p>
+                    </body>        
+                </html>
+                    `
+              })
+              .then((result) => {
+                console.log('Email was sent');
+                console.log(result);
+                res.redirect('/');
+              })
+              .catch((error) => {
+                console.log('There was an error sending email');
+                console.log(error);
+              });
           })
           .catch((error) => {
             next(error);
