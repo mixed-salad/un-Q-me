@@ -65,8 +65,9 @@
                     <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
                         "DD/MM/YYYY"
                         }}} at {{{ date creationDate "HH:mm" }}}</small>
-
-                    <p>Status: <span class="status status-{{ status }}">{{ status }}</span></p>
+                    <div class="status">
+                        <p>Status: <span class="status-{{ status }}">{{ status }}</span></p>
+                    </div>
                 </article>
             </div>
         </div>

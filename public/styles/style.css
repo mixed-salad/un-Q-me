@@ -498,7 +498,7 @@ input[type="file"] {
   background-color: #ffbb00;
   padding: 0.3em 0.8em;
   border-radius: 20% 10%;
-  margin: 0 1em !important;
+  margin: 0 1em;
 }
 
 .card .status-Done {
