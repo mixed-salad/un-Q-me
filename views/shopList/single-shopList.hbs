@@ -1,20 +1,21 @@
 <h1 class="section-title centered-text">Shopping List details</h1>
 
 <section class="two-column-secction-shoplist">
-    <div id ="log-in-box" >
-        
-        <p class="centered-text">Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{ date creationDate "DD/MM/YYYY"
+    <div id="log-in-box">
+
+        <p class="centered-text">Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{
+            date creationDate "DD/MM/YYYY"
             }}} at {{{ date creationDate "HH:mm" }}}</p>
         <p class="centered-text">Status: <span>{{ list.status }}</span></p>
 
         <h3 class="centered-text">{{ list.storeName }}</h3>
         <h4 class="centered-text">{{ list.itemsNeeded }}</h4>
-    
+
         {{#if isVisitor}}
         <p class="centered-text">
-            <a href="/message/{{list.creator._id}}" >Message {{ list.creator.name }}</a>
+            <a href="/message/{{list.creator._id}}">Message {{ list.creator.name }}</a>
         </p>
-            
+
         {{#if pending}}
         <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
             <button class="btn-form list-btn">I can help!</button>
@@ -39,7 +40,8 @@
         {{#if pending}}
         <p class="centered-text">Waiting for someone to help you.</p>
         {{else if offered}}
-        <p class="centered-text">Offer has been made by <a href="/user/{{list.helper._id}}">{{ list.helper.name }}</a></p>
+        <p class="centered-text">Offer has been made by <a href="/user/{{list.helper._id}}">{{ list.helper.name }}</a>
+        </p>
 
 
         <form action="/shopList/{{list._id}}/changestatus/{{list.status}}" method="POST">
@@ -51,6 +53,7 @@
         <p>{{list.creator.name}} accepted your offer!</p>
         <a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
         {{else if done}}
+        <img src="/images/checkmark-clipart-2-transparent.png" alt="check-mark" />
         <p class="centered-text">This list has been taken care of.</p>
         {{/if}}
         <a class="highlight-wide list-btn btn-form centered-text" href="/shopList/{{ list._id }}/edit">Edit the list</a>
@@ -58,15 +61,15 @@
             <button class="btn-form delete-btn">Delete the list</button>
         </form>
         {{/if}}
-    
-    
-    
+
+
+
     </div>
 
     <div id="map-shopList"></div>
 
-</section >
-    
+</section>
+
 
 <script>
     const list = {{{ json list }}};
