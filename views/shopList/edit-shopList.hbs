@@ -1,13 +1,14 @@
-<h1>Edit the shopping list</h1>
+<h1 class="section-title centered-text">Edit the shopping list</h1>
+<div class="create-list">
+    <form method="POST">
+        <label class="centered-text" for="input-store">From which store?</label>
+        <input class="centered-text" type="text" id="input-store" name="storeName"
+            placeholder="Edeka, DM, Rewe, Lidl, etc..." value="{{ list.storeName }}" required>
 
-<form method="POST">
-    <label for="input-store">From which store?</label>
-    <input type="text" id="input-store" name="storeName" placeholder="Edeka, DM, Rewe, Lidl, etc..."
-        value="{{ list.storeName }}" required>
+        <label for="input-items" class="centered-text">What do you need?</label>
+        <input class="centered-text" type="text" id="input-items" name="itemsNeeded"
+            placeholder="carrots, milk, eggs, etc..." value="{{ list.itemsNeeded }}" required>
 
-    <label for="input-items">What do you need?</label>
-    <input type="text" id="input-items" name="itemsNeeded" placeholder="carrots, milk, eggs, etc..."
-        value="{{ list.itemsNeeded }}" required>
-
-    <button class="btn-form">Update the list</button>
-</form>
+        <button class="btn-form">Update the list</button>
+    </form>
+</div>
