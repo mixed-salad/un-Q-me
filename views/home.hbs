@@ -62,12 +62,13 @@
                 <article class="card-text">
                     <p>Zip code: {{ creator.addressZip }}</p>
                     <p>{{ itemsNeeded }}</p>
-                    <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
+                    <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date
+                        creationDate
                         "DD/MM/YYYY"
                         }}} at {{{ date creationDate "HH:mm" }}}</small>
                     <div class="status">
                         <p>Status: </p>
-                        <span class="status-{{ status }}">{{ status }}</span>
+                        <span class="status-label status-{{ status }}">{{ status }}</span>
                     </div>
                 </article>
             </div>

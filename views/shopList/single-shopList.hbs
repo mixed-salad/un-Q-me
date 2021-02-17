@@ -6,7 +6,10 @@
         <p class="centered-text">Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{
             date creationDate "DD/MM/YYYY"
             }}} at {{{ date creationDate "HH:mm" }}}</p>
-        <p class="centered-text">Status: <span>{{ list.status }}</span></p>
+        <div class="status">
+            <p>Status: </p>
+            <span class="status-label status-{{ list.status }}">{{ list.status }}</span>
+        </div>
 
         <h3 class="centered-text">{{ list.storeName }}</h3>
         <h4 class="centered-text">{{ list.itemsNeeded }}</h4>

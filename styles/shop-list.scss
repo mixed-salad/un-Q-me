@@ -1,14 +1,47 @@
-#map-shopList{
-    height: 365px;
-    width: 500px;
-    margin-left: 10px;
-    border-radius: 20px;
-    border: 3px solid white;
+#map-shopList {
+  height: 365px;
+  width: 500px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: 3px solid white;
 }
 
-.two-column-secction-shoplist{
-    margin-top: 50px;
-    display:flex;
-    justify-content: space-between;
-    align-items:flex-start;
+.two-column-secction-shoplist {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#log-in-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  p {
+    margin: 0;
+    margin-right: 5px;
+    width: 20%;
+    overflow: hidden;
+  }
+  .status-label {
+    padding: 0.3em 1.5em;
+    border-radius: 40px;
+  }
+  .status-Pending {
+    background-color: rgb(0, 163, 163);
+  }
+  .status-Offered {
+    background-color: rgb(255, 187, 0);
+  }
+  .status-Done {
+    background-color: rgb(255, 0, 76);
+  }
 }

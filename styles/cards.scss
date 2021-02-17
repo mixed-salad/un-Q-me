@@ -185,23 +185,23 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  p:first-child {
+  p {
     margin: 0;
+    margin-right: 5px;
     width: 20%;
+    overflow: hidden;
   }
-}
-.card .status-Pending {
-  background-color: rgb(0, 163, 163);
-  padding: 0.3em 1.5em;
-  border-radius: 20%;
-}
-.card .status-Offered {
-  background-color: rgb(255, 187, 0);
-  padding: 0.3em 0.8em;
-  border-radius: 20%;
-}
-.card .status-Done {
-  background-color: rgb(255, 0, 76);
-  padding: 0.3em 1.5em;
-  border-radius: 20%;
+  .status-label {
+    padding: 0.3em 1.5em;
+    border-radius: 40px;
+  }
+  .status-Pending {
+    background-color: rgb(0, 163, 163);
+  }
+  .status-Offered {
+    background-color: rgb(255, 187, 0);
+  }
+  .status-Done {
+    background-color: rgb(255, 0, 76);
+  }
 }
