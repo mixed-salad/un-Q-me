@@ -56,7 +56,7 @@
         <p>{{list.creator.name}} accepted your offer!</p>
         <a href="/message/{{list.creator._id}}">Message {{list.creator.name}}</a> --}}
         {{else if done}}
-        <img src="/images/checkmark-clipart-2-transparent.png" alt="check-mark" />
+        {{!-- <img src="/images/checkmark-clipart-2-transparent.png" alt="check-mark" /> --}}
         <p class="centered-text">This list has been taken care of.</p>
         {{/if}}
         <a class="highlight-wide list-btn btn-form centered-text" href="/shopList/{{ list._id }}/edit">Edit the list</a>

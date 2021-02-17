@@ -311,6 +311,11 @@ input[type="file"] {
   align-items: center;
 }
 
+#log-in-box h3 {
+  font-size: 1.5em;
+  margin-bottom: 0;
+}
+
 .status {
   width: 100%;
   display: flex;
@@ -554,6 +559,10 @@ input[type="file"] {
 
 .card .status .status-Done {
   background-color: #ff004c;
+}
+
+.card a.created-by {
+  text-decoration: underline;
 }
 
 #message {
