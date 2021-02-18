@@ -1,18 +1,25 @@
 .profile-picture {
-    margin-right: 2em;
-    width: 20em;
-    height: 20em;
-    border-radius: 60% 10% / 10% 60%;
-    object-fit: cover;
-  }
-  
-  #edit-profile{
-    border-radius: 55% 8% / 8% 55%;
-    padding: 50px 50px;  
-    background-color:$lightorange;
-  
-  }
+  margin-right: 2em;
+  width: 20em;
+  height: 20em;
+  border-radius: 60% 10% / 10% 60%;
+  object-fit: cover;
+}
 
-  #input-profile-picture{
-    border: 3px solid white;
-  }
+.profile-picture-edit {
+  margin-right: 2em;
+  width: 10em;
+  height: 10em;
+  border-radius: 60% 10% / 10% 60%;
+  object-fit: cover;
+}
+
+#edit-profile {
+  border-radius: 55% 8% / 8% 55%;
+  padding: 50px 50px;
+  background-color: $lightorange;
+}
+
+#input-profile-picture {
+  border: 3px solid white;
+}
