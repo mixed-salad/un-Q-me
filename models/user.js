@@ -49,6 +49,9 @@ const schema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'shopList'
   }],
+  description: {
+    type: String
+  }
 
 },
 {

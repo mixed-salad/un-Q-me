@@ -1,31 +1,37 @@
 <h1 class="section-title centered-text">Sign up</h1>
 
 <form id="edit-profile" method="POST" enctype="multipart/form-data">
-  
-  <div class ="form-wrapper">
-  <label for="input-name">Name</label>
-  <input type="text" id="input-name" name="name" placeholder="Your Name" required />
+
+  <div class="form-wrapper">
+    <label for="input-name">Name</label>
+    <input type="text" id="input-name" name="name" placeholder="Your Name" required />
   </div>
 
-  <div class ="form-wrapper">
-  <label for="input-profile-picture" class="custom-file-upload" >Upload Profile Picture</label>
-  <input id="input-profile-picture" class="custom-file-upload" type="file" name="profilePicture" accept="image/png, image/jpeg" />
+  <div class="form-wrapper">
+    <label for="input-profile-picture" class="custom-file-upload">Upload Profile Picture</label>
+    <input id="input-profile-picture" class="custom-file-upload" type="file" name="profilePicture"
+      accept="image/png, image/jpeg" />
   </div>
 
-  <div class ="form-wrapper">
-  <label for="input-email">Email</label>
-  <input type="email" id="input-email" name="email" placeholder="Your Email" required />
+  <div class="form-wrapper">
+    <label for="input-description">Brief description of yourself</label>
+    <textarea rows="10" cols="25" id="input-description" name="description">Introduce who you are!</textarea>
   </div>
 
-  <div class ="form-wrapper">
+  <div class="form-wrapper">
+    <label for="input-email">Email</label>
+    <input type="email" id="input-email" name="email" placeholder="Your Email" required />
+  </div>
+
+  <div class="form-wrapper">
     <label for="input-password">Password</label>
     <input type="password" name="password" id="input-password" placeholder="A Strong Password" required minlength="8" />
   </div>
 
-  <div class ="form-wrapper">
+  <div class="form-wrapper">
     <label for="input-address">Address</label>
     <input type="text" id="input-address" name="addressStreet" placeholder="Street" />
-     <input type="number" name="addressHouseNr" placeholder="House number" />
+    <input type="number" name="addressHouseNr" placeholder="House number" />
     <input type="number" name="addressZip" placeholder="Zip code" />
     <input type="text" name="addressCity" placeholder="City" />
     <input type="text" name="addressCountry" placeholder="Country" />
