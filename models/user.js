@@ -41,10 +41,15 @@ const schema = new mongoose.Schema({
   lng: {
     type: Number
   },
+  active:{
+    type: Boolean,
+    default: true
+  },
   createdLists:[{
     type: mongoose.Types.ObjectId,
     ref: 'shopList'
-  }]
+  }],
+
 },
 {
   timestamps: {

@@ -24,6 +24,10 @@ const schema = new mongoose.Schema({
   status: {
       type: String,
       enum: ["Pending", "Offered", "Accepted", "Done"]
+  },
+  active:{
+    type: Boolean,
+    default: true
   }
 },
 {

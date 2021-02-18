@@ -259,7 +259,9 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
 
 router.post('/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  List.findByIdAndDelete(id)
+  List.findByIdAndUpdate(id, {
+    active: false
+    })
     .then(() => {
       res.redirect('/');
     })

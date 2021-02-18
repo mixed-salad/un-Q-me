@@ -11,6 +11,9 @@
             {{profileUser.addressCity}}, {{profileUser.addressCountry}} </p>
         <p>Email: {{profileUser.email}} </p>
         <p class="centered-text btn-form"><a href="/user/{{ profileUser._id }}/edit">Edit your profile</a></p>
+        <form action="/user/{{profileUser._id}}/delete" method="POST">
+            <button class="btn-form delete-btn">Delete profile</button>
+        </form>
         {{/if}}
     </div>
 </section>
