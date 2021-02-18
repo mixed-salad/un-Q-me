@@ -38,17 +38,27 @@
     }).addTo(mymap);
 
     const lists = {{{ json lists }}};
+    const users = {{{ json users }}};
 
-    for (let list of lists) {
-        var circle = L.circle([list.creator.lat, list.creator.lng], {
-            color: '#f03',
-            fillColor: '#f03',
-            fillOpacity: 0.4,
-            radius: 200
-        }).addTo(mymap);
-        var popup = circle.bindPopup(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`);
+    for (let user of users) {
+        if (user.createdLists.length > 0){
+            var circle = L.circle([user.lat, user.lng], {
+                color: '#f03',
+                fillColor: '#f03',
+                fillOpacity: 0.4,
+                radius: 200
+            }).addTo(mymap);
+            userText=`<h4> ${user.name}'s Lists </h4>`
+            for (list of user.createdLists){
+                userText=userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
 
-        mymap.on('click', popup);
+            }
+            
+            var popup = circle.bindPopup(userText);
+            //`<p><b>${user.name}</b> <a href="/shoplist/${user._id}">Check the list</a></p>`
+            mymap.on('click', popup);
+        }
+
     }
 </script>
 

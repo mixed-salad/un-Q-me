@@ -1,5 +1,5 @@
 'use strict';
-
+const ListSchema = require('./../models/shopList');
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
@@ -40,7 +40,11 @@ const schema = new mongoose.Schema({
   },
   lng: {
     type: Number
-  }
+  },
+  createdLists:[{
+    type: mongoose.Types.ObjectId,
+    ref: 'shopList'
+  }]
 },
 {
   timestamps: {

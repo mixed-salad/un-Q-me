@@ -3,6 +3,7 @@
 const express = require('express');
 const router = new express.Router();
 const List = require('./../models/shopList');
+const User = require('./../models/user');
 //i updated it to check if the user is logged in, if not redirect to /log in
 const routeGuard = require('./../middleware/route-guard');
 const axios = require('axios');
@@ -17,7 +18,8 @@ router.get('/', routeGuard, (req, res, next) => {
   const addressMain = encodeURIComponent(`${inputCity}, ${inputZip}`);
 
   const acdUrl = `https://api.opencagedata.com/geocode/v1/json?q=${addressMain}&key=fc784150925444589a9d2a8c13654b25`;
-
+  let users = [];
+  let lists = [];
   axios
     .get(acdUrl)
     .then((result) => {
@@ -27,8 +29,19 @@ router.get('/', routeGuard, (req, res, next) => {
     .then(() => {
       return List.find().populate('creator');
     })
-    .then((lists) => {
-      res.render('home', { lists });
+    .then((listsData) => {
+      lists = listsData;
+      return User.find().populate("createdLists");
+    })
+    .then((userData) => {
+      users = userData;
+
+      //console.log(users[2].createdList);
+      //console.log(users[1].lat),
+      console.log(users[10].createdLists.length)
+      console.log(users);
+      //console.log(lists)
+      res.render('home', { lists, users });
     })
     .catch((error) => {
       next(error);

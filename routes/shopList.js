@@ -5,6 +5,7 @@ const List = require('../models/shopList');
 const routeGuard = require('../middleware/route-guard');
 const transport = require('./../middleware/transport');
 const dotenv = require('dotenv');
+const User = require('../models/user');
 dotenv.config();
 
 const router = new express.Router();
@@ -15,7 +16,7 @@ router.get('/create', routeGuard, (req, res, next) => {
 
 router.post('/create', routeGuard, (req, res, next) => {
   const data = req.body;
-
+  let listId = new String()
   List.create({
     creator: req.user._id,
     storeName: data.storeName,
@@ -23,7 +24,16 @@ router.post('/create', routeGuard, (req, res, next) => {
     status: 'Pending'
   })
     .then((post) => {
-      res.redirect(`/shopList/${post._id}`);
+      console.log("creator:"+post.creator)
+      listId = post._id
+      return User.findByIdAndUpdate(post.creator, {
+        $push:{createdLists: post._id}
+      })
+    })
+    .then((user)=>{
+      console.log(user)
+      console.log("list:"+listId)
+      res.redirect(`/shopList/${listId}`);
     })
     .catch((error) => {
       next(error);
