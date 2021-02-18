@@ -13,9 +13,9 @@ let langitude;
 
 router.get('/', routeGuard, (req, res, next) => {
   const inputCity = req.query.cityMain || 'Berlin';
-  const inputZip = req.query.cityZip || 10119;
+  const inputCountry = req.query.countryMain || 'Germany';
 
-  const addressMain = encodeURIComponent(`${inputCity}, ${inputZip}`);
+  const addressMain = encodeURIComponent(`${inputCity}, ${inputCountry}`);
 
   const acdUrl = `https://api.opencagedata.com/geocode/v1/json?q=${addressMain}&key=fc784150925444589a9d2a8c13654b25`;
   let users = [];
@@ -38,8 +38,8 @@ router.get('/', routeGuard, (req, res, next) => {
 
       //console.log(users[2].createdList);
       //console.log(users[1].lat),
-      console.log(users[10].createdLists.length)
-      console.log(users);
+      // console.log(users[10].createdLists.length)
+      // console.log(users);
       //console.log(lists)
       res.render('home', { lists, users });
     })

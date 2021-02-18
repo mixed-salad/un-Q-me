@@ -11,8 +11,8 @@
             </div>
 
             <div class="form-wrapper">
-                <label for="input-zip-main">Zip code</label>
-                <input type="search" id="input-zip-main" name="zipMain">
+                <label for="input-country-main">Country</label>
+                <input type="search" id="input-country-main" name="countryMain">
 
             </div>
 
@@ -27,7 +27,7 @@
 <script>
     const inputLatitude = {{{ json inputLatitude }}};
     const inputLangitude = {{{ json inputLangitude }}};
-    let mymap = L.map('map-main').setView([inputLatitude, inputLangitude], 13);
+    let mymap = L.map('map-main').setView([inputLatitude, inputLangitude], 12);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -41,19 +41,19 @@
     const users = {{{ json users }}};
 
     for (let user of users) {
-        if (user.createdLists.length > 0){
+        if (user.createdLists.length > 0) {
             var circle = L.circle([user.lat, user.lng], {
                 color: '#f03',
                 fillColor: '#f03',
                 fillOpacity: 0.4,
                 radius: 200
             }).addTo(mymap);
-            userText=`<h4> ${user.name}'s Lists </h4>`
-            for (list of user.createdLists){
-                userText=userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
+            userText = `<h4> ${user.name}'s Lists </h4>`
+            for (list of user.createdLists) {
+                userText = userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
 
             }
-            
+
             var popup = circle.bindPopup(userText);
             //`<p><b>${user.name}</b> <a href="/shoplist/${user._id}">Check the list</a></p>`
             mymap.on('click', popup);
