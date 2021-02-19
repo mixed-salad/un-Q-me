@@ -44,63 +44,76 @@ router.post(
       .then((result) => {
         latitude = result.data.results[0].geometry.lat;
         langitude = result.data.results[0].geometry.lng;
+        console.log(data.email)
+        return User.findOne({
+          email: data.email
+        })
       })
-      .then(() => {
-        bcryptjs
+      .then(user => {
+        if (user.active === true) {
+          throw new Error('There is already a user with that email.');
+        } else if(user.active === false){
+          throw new Error('There is an disactivated account with that email.');
+        }else
+        {
+          // If there isn't a user with that email in the database
+          // we want to go ahead and hash the inserted password
+          return bcryptjs
           .hash(data.password, 10)
-          .then((hash) => {
-            return User.create({
-              name: data.name,
-              profilePicture: image,
-              email: data.email,
-              passwordHashAndSalt: hash,
-              addressStreet: data.addressStreet,
-              addressHouseNr: data.addressHouseNr,
-              addressZip: data.addressZip,
-              addressCity: data.addressCity,
-              addressCountry: data.addressCountry,
-              lat: latitude,
-              lng: langitude,
-              description: data.description
-            });
+        }
+        })
+      .then((hash) => {
+        return User.create({
+          name: data.name,
+          profilePicture: image,
+          email: data.email,
+          passwordHashAndSalt: hash,
+          addressStreet: data.addressStreet,
+          addressHouseNr: data.addressHouseNr,
+          addressZip: data.addressZip,
+          addressCity: data.addressCity,
+          addressCountry: data.addressCountry,
+          lat: latitude,
+          lng: langitude,
+          description: data.description
+        });
+      })
+      .then((user) => {
+        req.session.userId = user._id;
+        req.user = user;
+        return transport
+          .sendMail({
+            from: process.env.GMAIL_ADDRESS,
+            to: process.env.GMAIL_ADDRESS,
+            subject: `Welcome to unQme, ${user.name}`,
+            html: `
+            <html>
+                <head>
+                </head>
+                <body>
+                <h1>Hi, ${user.name}! Welcome to unQme</h1>
+                <p>Log in <a href="http://localhost:3000/authentication/log-in">here.</a></p>
+                </body>        
+            </html>
+                `
           })
-          .then((user) => {
-            req.session.userId = user._id;
-            req.user = user;
-            transport
-              .sendMail({
-                from: process.env.GMAIL_ADDRESS,
-                to: process.env.GMAIL_ADDRESS,
-                subject: `Welcome to unQme, ${user.name}`,
-                html: `
-                <html>
-                    <head>
-                    </head>
-                    <body>
-                    <h1>Hi, ${user.name}! Welcome to unQme</h1>
-                    <p>Log in <a href="http://localhost:3000/authentication/log-in">here.</a></p>
-                    </body>        
-                </html>
-                    `
-              })
-              .then((result) => {
-                console.log('Email was sent');
-                console.log(result);
-                res.redirect('/');
-              })
-              .catch((error) => {
-                console.log('There was an error sending email');
-                console.log(error);
-              });
+          .then((result) => {
+            console.log('Email was sent');
+            console.log(result);
+            res.redirect('/');
           })
           .catch((error) => {
-            next(error);
+            console.log('There was an error sending email');
+            console.log(error);
           });
-      })
-      .catch((error) => {
-        next(error);
-      });
-  }
+        })
+        .catch((error) => {
+          next(error);
+        })
+    .catch((error) => {
+      next(error);
+    });
+}
 );
 
 router.get('/log-in', (req, res, next) => {

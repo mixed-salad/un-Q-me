@@ -5,15 +5,49 @@
 
 #send{
     border: 3px solid $darkgreen;
+}
+.message,
+.send-message{
+    width: 500px;
+    margin: 0 auto
+}
+
+.message:after{
+    content: "";
+    display: table;
+    clear: both;
 
 }
+
+
 
 .sender-false,
 .sender-true{
-    padding: 0 10px
+    display:block;
+    width: 300px;
+    float:left;
+    padding: 10px 20px;
+    border-radius: 60% 10% / 10% 60%;
+    margin-bottom: 10px;
 }
 
+.sb5:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid #00bfb6;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #00bfb6;
+    border-bottom: 10px solid transparent;
+    right: -20px;
+    top: 6px;
+  }
+
 .sender-true{
+    display:block;
+    float:right;
+    left: 100%;
     text-align: right;
     background-color: $lightorange ;
 }

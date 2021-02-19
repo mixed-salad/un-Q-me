@@ -1,15 +1,19 @@
-<h1>Messages to {{receiver.name}}</h1>
-{{#each messages}}
-
-<p class="sender-{{sender}}"> {{messageBody}}</p>
+<h1 class="section-title centered-text">Messages to {{receiver.name}}</h1>
 
 
-{{/each}}
+    {{#each messages}}
+<div class="message">
+
+    <p class=   "sender-{{sender}} sb5"> {{messageBody}}</p>
+
+</div>
+    {{/each}}
 
 
 
-<form method="POST">
-    <label for="input-message">New Message </label>
+
+<form class="send-message" method="POST">
+    <label for="input-message" hidden>New Message </label>
     <textarea id="message" name="message" rows="5" cols="33"> Your message to {{receiver.name}}  </textarea>
     <button id="send" class="btn-form">Send</button>
 </form>
