@@ -9,26 +9,40 @@ const router = new express.Router();
 
 router.get('/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  Message.find({
-    $or:[
-      {$and:[
-        {senderId:{$eq:id}},
-        {receiverId:{$eq:req.user._id}}
-      ]},
-      {$and:[
-        {senderId:{$eq:req.user._id}},
-        {receiverId:{$eq:id}}
-      ]}
-    ]
-  }
+  console.log(req.user._id)
+  Message.updateMany(
+    {"senderId":{ $eq: req.user._id }},
+    {"sender":true}
   )
-  .populate('senderId')
-  .populate('receiverId')
+  .then(()=>{
+    return Message.find({
+      $or:[
+        {$and:[
+          {senderId:{$eq:id}},
+          {receiverId:{$eq:req.user._id}}
+        ]},
+        {$and:[
+          {senderId:{$eq:req.user._id}},
+          {receiverId:{$eq:id}}
+        ]}
+      ]
+    }
+    )
+    .populate('senderId')
+    .populate('receiverId')
+
+  })
   .then((messages) => {
     User.findById(id)
     .then(receiver =>{
+      console.log(messages)
       res.render('message/chat-room', {messages, receiver});
-    } )
+      Message.updateMany(
+        {"senderId":{ $eq: req.user._id }},
+        {"sender":false}
+      ).then((message)=>{
+      })
+    })
   })
   .catch((error) => {
     next(error);

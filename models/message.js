@@ -19,6 +19,10 @@ const schema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true
+  },
+  sender:{
+    type: Boolean,
+    default:false
   }
 }, 
 {

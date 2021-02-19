@@ -7,3 +7,18 @@
     border: 3px solid $darkgreen;
 
 }
+
+.sender-false,
+.sender-true{
+    padding: 0 10px
+}
+
+.sender-true{
+    text-align: right;
+    background-color: $lightorange ;
+}
+
+.sender-false{
+    background-color: $darkorange ;
+
+}

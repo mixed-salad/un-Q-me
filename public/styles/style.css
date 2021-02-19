@@ -570,6 +570,20 @@ input[type="file"] {
   border: 3px solid #256f3f;
 }
 
+.sender-false,
+.sender-true {
+  padding: 0 10px;
+}
+
+.sender-true {
+  text-align: right;
+  background-color: #efc167;
+}
+
+.sender-false {
+  background-color: #d69108;
+}
+
 .profile-picture {
   margin-right: 2em;
   width: 20em;

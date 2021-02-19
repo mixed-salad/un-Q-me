@@ -1,7 +1,7 @@
 <h1>Messages to {{receiver.name}}</h1>
 {{#each messages}}
 
-<p>{{senderId.name}}: {{messageBody}}</p>
+<p class="sender-{{sender}}"> {{messageBody}}</p>
 
 
 {{/each}}
