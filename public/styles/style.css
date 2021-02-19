@@ -359,10 +359,10 @@ input[type="file"] {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 3px solid #ecad30;
   border-radius: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+  border: 3px solid #ecad30;
 }
 
 .card > hr {

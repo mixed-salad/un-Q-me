@@ -30,6 +30,7 @@
 <h3 class="section-title centered-text">You posted these shopping lists</h3>
 <div class="card-group">
     {{#each postedLists}}
+    {{#if active}}
     <a href="/shopList/{{_id}}">
         <div class="card">
             <div class="card-body">
@@ -51,6 +52,7 @@
             </div>
         </div>
     </a>
+    {{/if}}
     {{/each}}
 </div>
 {{/if}}

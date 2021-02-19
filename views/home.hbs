@@ -41,16 +41,26 @@
     const users = {{{ json users }}};
 
     for (let user of users) {
+        
         if (user.createdLists.length > 0){
-            var circle = L.circle([user.lat, user.lng], {
-                color: '#f03',
-                fillColor: '#f03',
-                fillOpacity: 0.4,
-                radius: 200
-            }).addTo(mymap);
-            userText=`<h4> ${user.name}'s Lists </h4>`
+            let x = 0
             for (list of user.createdLists){
-                userText=userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
+                if (list.active){
+                    if (x===0){
+                        var circle = L.circle([user.lat, user.lng], {
+                            color: '#f03',
+                            fillColor: '#f03',
+                            fillOpacity: 0.4,
+                            radius: 200
+                        }).addTo(mymap);
+                        userText=`  <h4> ${user.name}'s Lists </h4>
+                                    <p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>
+                                    `
+                    } else{
+                        userText=userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
+                    }
+                    x= x+1
+                }
 
             }
             
@@ -63,7 +73,8 @@
 </script>
 
 <div class="card-group">
-    {{#each lists}}
+    {{#each lists as | list |}}
+    {{#if list.active}}
     <a href="/shopList/{{_id}}">
 
         <div class="card">
@@ -79,10 +90,13 @@
                     <div class="status">
                         <p>Status: </p>
                         <span class="status-label status-{{ status }}">{{ status }}</span>
+
                     </div>
                 </article>
             </div>
         </div>
     </a>
+    {{/if}}
+    
     {{/each}}
 </div>

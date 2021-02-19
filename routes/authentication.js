@@ -114,8 +114,12 @@ router.post('/log-in', (req, res, next) => {
       if (!document) {
         return Promise.reject(new Error("There's no user with that email."));
       } else {
-        user = document;
-        return bcryptjs.compare(data.password, user.passwordHashAndSalt);
+        if (document.active === false){
+          return Promise.reject(new Error("Account was deactivated."));
+        } else{
+          user = document;
+          return bcryptjs.compare(data.password, user.passwordHashAndSalt);
+        }
       }
     })
     .then((result) => {

@@ -21,6 +21,9 @@ router.get('/:id', routeGuard, (req, res, next) => {
         const error = new Error('User does not exist.');
         error.status = 404;
         next(error);
+      } else if (result.active === false){
+        const error = new Error("Account is deactivated.");
+        next(error);
       } else {
         if (req.user._id.toString() === id) {
           isVisitor = false;
@@ -63,7 +66,12 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   User.findById(id)
     .then((user) => {
+    if (user.active === false){
+      const error = new Error("Account is deactivated.");
+      next(error);
+    }else{
       res.render('user/edit-profile', { user });
+    }
     })
     .catch((error) => {
       next(error);
@@ -142,7 +150,8 @@ router.post('/:id/delete', routeGuard, (req, res, next) => {
       }
     })
     .then(() => {
-      res.redirect('/authentication/log-in');
+      req.session.destroy();
+      res.redirect('/');
     })
     .catch((error) => {
       next(error);

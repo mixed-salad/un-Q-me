@@ -51,6 +51,11 @@ router.get('/:id', routeGuard, (req, res, next) => {
         const error = new Error('List does not exist.');
         error.status = 404;
         next(error);
+
+      } else if (list.active === false) {
+        const error = new Error('List does not exist.');
+        error.status = 404;
+        next(error);  
       } else {
         let pending = false;
         let offered = false;
@@ -132,7 +137,12 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   List.findById(id)
     .then((list) => {
+    if (list.active === false){
+      const error = new Error("List doesn´t exist.");
+      next(error);
+    } else { 
       res.render('shopList/edit-shopList', { list });
+    }
     })
     .catch((error) => {
       next(error);
