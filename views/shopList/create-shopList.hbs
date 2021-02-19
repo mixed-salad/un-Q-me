@@ -1,9 +1,23 @@
 <h1 class="section-title centered-text">Create a shopping list</h1>
 <div class="create-list">
     <form method="POST">
+
         <label for="input-store" class="centered-text">From which store?</label>
-        <input type="text" id="input-store" class="centered-text" name="storeName"
-            placeholder="Edeka, DM, Rewe, Lidl, etc..." required>
+        <select name="storeName" id="input-store">
+            <option value="" disabled>--Please choose an option--</option>
+            <option value="rewe">Rewe</option>
+            <option value="edeka">Edeka</option>
+            <option value="dm">DM</option>
+            <option value="rossmann">Rossmann</option>
+            <option value="alnatura">Alnatura</option>
+            <option value="bioCompany">Bio Company</option>
+            <option value="lidl">Lidl</option>
+            <option value="penny">Penny</option>
+            <option value="Aldi">Aldi</option>
+        </select>
+
+        {{!-- <input type="text" id="input-store" class="centered-text" name="storeName"
+            placeholder="Edeka, DM, Rewe, Lidl, etc..." required> --}}
 
         <label for="input-items" class="centered-text">What do you need?</label>
         <input type="text" id="input-items" class="centered-text" name="itemsNeeded"
