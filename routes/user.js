@@ -86,7 +86,7 @@ router.post(
     const id = req.params.id;
     const data = req.body;
 
-    let image;
+    let image = "/images/profile-picture.png";
     if (req.file) {
       image = req.file.path;
     }
@@ -117,7 +117,8 @@ router.post(
           addressCity: data.addressCity,
           addressCountry: data.addressCountry,
           latitude: latitude,
-          langitude: langitude
+          langitude: langitude,
+          description: data.description
         });
       })
       .then((user) => {

@@ -4,10 +4,14 @@
     <img class="profile-picture" src="{{ profileUser.profilePicture }}" alt="{{ profileUser.name }}">
     <div>
         {{#if isVisitor}}
+        <p>Name: {{profileUser.name}}</p>
+        <p>Description: {{ profileUser.description }}</p>
+        <p>Address: {{ profileUser.addressCity }}, {{ profileUser.addressZip }}</p>
         <a class="centered-text btn-form" href="/message/{{profileUser._id}}">Message {{ profileUser.name }}</a>
         {{else}}
         <p>Name: {{profileUser.name}}</p>
-        <p>Adress: {{profileUser.addressStreet}} {{profileUser.addressHouseNr}}, {{profileUser.addressZip}}
+        <p>Description: {{ profileUser.description }}</p>
+        <p>Address: {{profileUser.addressStreet}} {{profileUser.addressHouseNr}}, {{profileUser.addressZip}}
             {{profileUser.addressCity}}, {{profileUser.addressCountry}} </p>
         <p>Email: {{profileUser.email}} </p>
         <p class="centered-text btn-form"><a href="/user/{{ profileUser._id }}/edit">Edit your profile</a></p>

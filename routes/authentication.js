@@ -60,7 +60,8 @@ router.post(
               addressCity: data.addressCity,
               addressCountry: data.addressCountry,
               lat: latitude,
-              lng: langitude
+              lng: langitude,
+              description: data.description
             });
           })
           .then((user) => {

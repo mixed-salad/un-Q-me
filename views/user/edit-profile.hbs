@@ -1,26 +1,37 @@
 <h1 class="section-title centered-text">Edit profile</h1>
 
 <form id="edit-profile" method="POST" enctype="multipart/form-data">
-    <label for="input-name">Name</label>
-    <input type="text" id="input-name" name="name" placeholder="Your Name" required value="{{ user.name }}" />
+    <div class="form-wrapper">
+        <label for="input-name">Name</label>
+        <input type="text" id="input-name" name="name" placeholder="Your Name" required value="{{ user.name }}" />
+    </div>
 
-    <label for="input-profile-picture" class="custom-file-upload">Change Profile Picture</label>
-    <img class="profile-picture" src="{{ user.profilePicture }}" alt="{{ user.name }}">
-    <small>Your current profile picture</small>
-    <input  id="input-profile-picture" type="file" name="profilePicture" accept="image/png, image/jpeg" />
+    <div class="form-wrapper edit-profile-picture">
+        <img class="profile-picture-edit" src="{{ user.profilePicture }}" alt="{{ user.name }}">
+        <label for="input-profile-picture" class="custom-file-upload">Change the profile picture</label>
+        <input id="input-profile-picture" type="file" name="profilePicture" accept="image/png, image/jpeg" />
+    </div>
 
-    <label for="input-email">Email</label>
-    <input type="email" id="input-email" name="email" placeholder="Your Email" required value="{{ user.email }}" />
+    <div class="form-wrapper">
+        <label for="input-description">Brief description of yourself</label>
+        <textarea rows="10" cols="25" id="input-description" name="description">{{ user.description }}</textarea>
+    </div>
+    <div class="form-wrapper">
+        <label for="input-email">Email</label>
+        <input type="email" id="input-email" name="email" placeholder="Your Email" required value="{{ user.email }}" />
+    </div>
 
     {{!-- <label for="input-password">Password</label>
     <input type="password" name="password" id="input-password" placeholder="A Strong Password" required /> --}}
-
-    <label for="input-address">Address</label>
-    <input type="text" id="input-address" name="addressStreet" placeholder="Street" value="{{ user.addressStreet }}" />
-    <input type=" number" name="addressHouseNr" placeholder="House number" value="{{ user.addressHouseNr }}" />
-    <input type=" number" name="addressZip" placeholder="Zip code" value="{{ user.addressZip }}" />
-    <input type=" text" name="addressCity" placeholder="City" value="{{ user.addressCity }}" />
-    <input type=" text" name="addressCountry" placeholder="Country" value="{{ user.addressCountry }}" />
+    <div class="form-wrapper">
+        <label for="input-address">Address</label>
+        <input type="text" id="input-address" name="addressStreet" placeholder="Street"
+            value="{{ user.addressStreet }}" />
+        <input type=" number" name="addressHouseNr" placeholder="House number" value="{{ user.addressHouseNr }}" />
+        <input type=" number" name="addressZip" placeholder="Zip code" value="{{ user.addressZip }}" />
+        <input type=" text" name="addressCity" placeholder="City" value="{{ user.addressCity }}" />
+        <input type=" text" name="addressCountry" placeholder="Country" value="{{ user.addressCountry }}" />
+    </div>
 
     <button class="btn-form">Update the profile</button>
 </form>
