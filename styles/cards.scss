@@ -13,7 +13,6 @@
   margin-right: 5px;
   margin-bottom: 5px;
   border: 3px solid $logoorange;
-
 }
 
 .card > hr {
@@ -52,6 +51,10 @@
 
 .card-title {
   margin-bottom: 0.75rem;
+}
+
+.card-title:first-letter {
+  text-transform: capitalize;
 }
 
 .card-subtitle {

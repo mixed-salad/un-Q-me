@@ -3,8 +3,8 @@
     <form method="POST">
 
         <label for="input-store" class="centered-text">From which store?</label>
-        <select name="storeName" id="input-store">
-            <option value="" disabled>--Please choose an option--</option>
+        <select name="storeName" id="input-store" required>
+            <option value="">--Please choose a store--</option>
             <option value="rewe">Rewe</option>
             <option value="edeka">Edeka</option>
             <option value="dm">DM</option>
@@ -13,7 +13,8 @@
             <option value="bioCompany">Bio Company</option>
             <option value="lidl">Lidl</option>
             <option value="penny">Penny</option>
-            <option value="Aldi">Aldi</option>
+            <option value="aldi">Aldi</option>
+            <option value="other">Other</option>
         </select>
 
         {{!-- <input type="text" id="input-store" class="centered-text" name="storeName"

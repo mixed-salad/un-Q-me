@@ -348,6 +348,10 @@ input[type="file"] {
   background-color: #ff004c;
 }
 
+.store-name:first-letter {
+  text-transform: capitalize;
+}
+
 .card {
   position: relative;
   display: -ms-flexbox;
@@ -401,6 +405,10 @@ input[type="file"] {
 
 .card-title {
   margin-bottom: 0.75rem;
+}
+
+.card-title:first-letter {
+  text-transform: capitalize;
 }
 
 .card-subtitle {
