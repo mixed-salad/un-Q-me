@@ -177,6 +177,20 @@ section {
   border: 3px solid #323232;
 }
 
+#description .p-description {
+  width: 40em;
+  margin: 0 auto;
+  font-size: 1.1em;
+}
+
+#description img {
+  margin-top: 30px;
+}
+
+.input-text {
+  cursor: text;
+}
+
 .two-column-secction,
 .two-column-secction-shoplist {
   display: flex;
@@ -300,8 +314,15 @@ select:focus,
   border: 1px solid #256f3f;
 }
 
+input:not([type='checkbox']),
+input:not([type='radio']),
+input:not([type='range']) {
+  cursor: text;
+}
+
 .btn-form {
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 select,
@@ -689,6 +710,14 @@ input[type="file"] {
 .send-message {
   width: 500px;
   margin: 0 auto;
+}
+
+.send-message {
+  cursor: pointer;
+}
+
+#message {
+  cursor: text;
 }
 
 .message:after {

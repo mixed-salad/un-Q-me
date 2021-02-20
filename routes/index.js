@@ -27,7 +27,7 @@ router.get('/', routeGuard, (req, res, next) => {
       res.locals.inputLangitude = result.data.results[0].geometry.lng;
     })
     .then(() => {
-      return List.find().populate('creator');
+      return List.find().sort({creationDate: -1}).populate('creator');
     })
     .then((listsData) => {
       lists = listsData;

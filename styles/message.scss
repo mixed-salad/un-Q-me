@@ -12,6 +12,13 @@
     margin: 0 auto
 }
 
+.send-message{
+    cursor: pointer
+}
+
+#message{
+    cursor: text
+}
 .message:after{
     content: "";
     display: table;

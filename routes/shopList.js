@@ -256,14 +256,14 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
           .then((result) => {
             console.log('Email was sent');
             console.log(result);
-            Message.create({
+            return Message.create({
               senderId: req.user._id,
               receiverId: list.creator._id,
               messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.helper._id}">${list.helper.name}</a> wants to help you with your <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can chat to talk about the details. </p>`
             })
           })
-          .then(()=>{
-            res.redirect(`/shopList/${id}`);
+          .then((message)=>{
+            res.redirect(`/message/${message.receiverId}`);
           })
           .catch((error) => {
             console.log('There was an error sending email');
@@ -302,14 +302,14 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
           .then((result) => {
             console.log('Email was sent');
             console.log(result);
-            Message.create({
+            return Message.create({
               senderId: req.user._id,
               receiverId: list.helper._id,
               messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.creator._id}">${list.creator.name}</a> wants to thank you for your help with this <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can keep on touch. </p>`
             })
           })
-          .then(()=>{
-            res.redirect(`/shopList/${id}`);
+          .then((message)=>{
+            res.redirect(`/message/${message.receiverId}`)
           })
           .catch((error) => {
             console.log('There was an error sending email');

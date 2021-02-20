@@ -198,6 +198,20 @@ section{
   border:3px solid $other;
 }
 
+#description .p-description{
+  width: 40em;
+  margin: 0 auto;
+  font-size: 1.1em;
+}
+
+#description img{
+  margin-top: 30px;
+} 
+
+.input-text{
+  cursor:text
+}
+
 @import 'main';
 @import 'single-shopList';
 @import 'forms';
