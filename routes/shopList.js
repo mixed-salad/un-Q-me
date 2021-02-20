@@ -170,26 +170,11 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
 router.post('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
-  if (data.storeName === undefined){
-    return List.findByIdAndUpdate(id, {
-      itemsNeeded: data.itemsNeeded
-    })
-    .then((list) => {
-      res.redirect(`/shopList/${id}`);
-    })
-    .catch((error) => {
-      next(error);
-    });
-  } else if (data.storeName === "other"){
+  if (data.storeName === "other"){
     return List.findByIdAndUpdate(id, {
       storeName: data.storeName,
-      itemsNeeded: data.itemsNeeded
-    }).then(()=>{
-      return List.findByIdAndUpdate(id, {
-        otherName: data.otherStore
-      }).catch((error) => {
-        next(error);
-      });
+      itemsNeeded: data.itemsNeeded,
+      otherName: data.otherStore
     })
     .then((list) => {
       res.redirect(`/shopList/${id}`);
@@ -248,7 +233,7 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
                   <body>
                   <h1>Hi, ${list.creator.name}!</h1>
                   <p>${list.helper.name} wants to help you with your shopping list in ${list.storeName}.</p>
-                  <p>If you want to accept the help, message ${list.helper.name} <a href="http://localhost:3000/message/${list.helper._id}">here</a>.</p>
+                  <p>If you want to accept the help, message ${list.helper.name} <a target="_blank" href="https://unqme.herokuapp.com/message/${list.helper._id}">here</a>.</p>
                   </body>        
               </html>
               `
@@ -259,7 +244,7 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
             return Message.create({
               senderId: req.user._id,
               receiverId: list.creator._id,
-              messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.helper._id}">${list.helper.name}</a> wants to help you with your <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can chat to talk about the details. </p>`
+              messageBody: `<p><a class="message-link" target="_blank" href="https://unqme.herokuapp.com/user/${list.helper._id}">${list.helper.name}</a> wants to help you with your <a class="message-link" target="_blank" href="https://unqme.herokuapp.com/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can chat to talk about the details. </p>`
             })
           })
           .then((message)=>{
@@ -293,8 +278,8 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
                   <body>
                   <h1>Hi, ${list.helper.name}!</h1>
                   <p>${list.creator.name} wants to thank you for your help with the shopping list in ${list.storeName}.</p>
-                  <p>Message ${list.creator.name} <a href="http://localhost:3000/message/${list.creator._id}">here</a>.</p>
-                  <p>Come back and help or get helped in <a href="http://localhost:3000/">unQme</a>  </a>.</p>
+                  <p>Message ${list.creator.name} <a target="_blank" href="https://unqme.herokuapp.com/message/${list.creator._id}">here</a>.</p>
+                  <p>Come back and help or get helped in <a target="_blank" href="https://unqme.herokuapp.com/">unQme</a>  </a>.</p>
                   </body>        
               </html>
               `
@@ -305,7 +290,7 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
             return Message.create({
               senderId: req.user._id,
               receiverId: list.helper._id,
-              messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.creator._id}">${list.creator.name}</a> wants to thank you for your help with this <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can keep on touch. </p>`
+              messageBody: `<p><a class="message-link" target="_blank" href="https://unqme.herokuapp.com/user/${list.creator._id}">${list.creator.name}</a> wants to thank you for your help with this <a class="message-link" target="_blank" href="https://unqme.herokuapp.com/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can keep on touch. </p>`
             })
           })
           .then((message)=>{

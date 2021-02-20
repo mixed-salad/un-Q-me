@@ -93,7 +93,7 @@ router.post(
                 </head>
                 <body>
                 <h1>Hi, ${user.name}! Welcome to unQme</h1>
-                <p>Log in <a href="http://localhost:3000/authentication/log-in">here.</a></p>
+                <p>Log in <a target="_blank" href="https://unqme.herokuapp.com/authentication/log-in">here.</a></p>
                 </body>        
             </html>
                 `

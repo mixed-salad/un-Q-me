@@ -3,8 +3,8 @@
     <form method="POST">
 
         <label for="input-store" class="centered-text">From another Store?</label>
-        <select name="storeName" id="input-store" onchange="otherSelect(this);">
-            <option value="undefined">--Please choose a store--</option>
+        <select name="storeName" id="input-store" onchange="otherSelect(this);" required>
+            <option value="">--Please choose a store--</option>
             <option value="rewe">Rewe</option>
             <option value="edeka">Edeka</option>
             <option value="dm">DM</option>
