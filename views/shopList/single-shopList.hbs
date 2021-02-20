@@ -1,6 +1,6 @@
 <h1 class="section-title centered-text">Shopping List details</h1>
 
-<section class="two-column-secction-shoplist">
+<section class="two-column-secction-shoplist {{list.storeName}}">
     <div id="log-in-box">
 
         <p class="centered-text">Created by <a href="/user/{{ list.creator._id }}">{{ list.creator.name }}</a> on {{{
@@ -63,7 +63,7 @@
         {{!-- <img src="/images/checkmark-clipart-2-transparent.png" alt="check-mark" /> --}}
         <p class="centered-text">This list has been taken care of.</p>
         {{/if}}
-        <a class="highlight-wide list-btn btn-form centered-text" href="/shopList/{{ list._id }}/edit">Edit the list</a>
+        <a class="centered-text btn-form href="/shopList/{{ list._id }}/edit">Edit the list</a>
         <form action="/shopList/{{ list._id }}/delete" method="POST">
             <button class="btn-form delete-btn">Delete the list</button>
         </form>

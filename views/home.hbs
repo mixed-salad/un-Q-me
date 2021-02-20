@@ -45,6 +45,7 @@
         
         if (user.createdLists.length > 0){
             let x = 0
+            let storeNameVar = new String()
             for (list of user.createdLists){
                 if (list.active){
                     if (x===0){
@@ -54,11 +55,32 @@
                             fillOpacity: 0.4,
                             radius: 200
                         }).addTo(mymap);
+                        
+                        if (list.storeName === "other"){
+                            if (list.otherName === undefined){
+                                storeNameVar = "Other"
+                            } else{
+                                storeNameVar = list.otherName
+                            }
+                        } else {
+                            storeNameVar = list.storeName
+
+                        }
                         userText=`  <h4> ${user.name}'s Lists </h4>
-                                    <p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>
+                                    <p><b>${storeNameVar}</b> <a href="/shoplist/${list._id}">Check the list</a></p>
                                     `
                     } else{
-                        userText=userText.concat(`<p><b>${list.storeName}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
+                        if (list.storeName === "other"){
+                            if (list.otherName === undefined){
+                                storeNameVar = "Other"
+                            } else{
+                                storeNameVar = list.otherName
+                            }
+                        } else {
+                            storeNameVar = list.storeName
+
+                        }
+                        userText=userText.concat(`<p><b>${storeNameVar}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
                     }
                     x= x+1
                 }
@@ -78,7 +100,7 @@
     {{#if list.active}}
     <a href="/shopList/{{_id}}">
 
-        <div class="card">
+        <div class="card {{storeName}}">
             <div class="card-body">
                 {{#if otherName}}
                     <h1 class="card-title">{{ otherName }}</h3>

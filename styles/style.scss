@@ -7,6 +7,27 @@ $darkgreen:rgb(37,111,63);
 $whiteorange: rgb(241, 235, 223);
 
 
+$rewe: rgb(165, 25, 25);
+$lightrewe: rgb(246, 187, 187);
+$edeka: rgba(226, 187, 12, 0.431);
+$lightedeka: rgb(245, 235, 194);
+$dm: rgb(62, 74, 248);
+$lightdm: rgb(191, 194, 248);
+$rossmann: rgb(117, 0, 0);
+$lightrossmann: rgb(177, 136, 136);
+$alnatura: rgb(63, 141, 0);
+$lightalnatura: rgb(237, 255, 221);
+$bioCompany: rgb(0, 128, 79);
+$lightbioCompany: rgb(199, 255, 234);
+$lidl: rgb(18, 5, 207);
+$lightlidl: rgb(170, 199, 246);
+$penny: rgb(221, 141, 12);
+$lightpenny: rgb(255, 234, 200);
+$aldi: rgb(64, 208, 251);
+$lightaldi: rgb(188, 238, 253);
+$other: rgb(50,50,50);
+$lightother: rgb(206, 206, 206);
+
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 * {
@@ -144,7 +165,38 @@ section{
   border: 2px solid $darkorange !important;
 }
 
-
+.rewe-color{
+  border:3px solid $rewe;
+  background-color: $rewe ;
+  border-radius: 60% 10% / 10% 60%;
+}
+.edeka-color{
+  border:3px solid $edeka;
+}
+.dm-color{
+  border:3px solid $dm;
+}
+.rossmann-color{
+  border:3px solid $rossmann;
+}
+.alnatura-color{
+  border:3px solid $alnatura;
+}
+.bioCompany-color{
+  border:3px solid $bioCompany;
+}
+.lidl-color{
+  border:3px solid $lidl;
+}
+.penny-color{
+  border:3px solid $penny;
+}
+.aldi-color{
+  border:3px solid $aldi;
+}
+.other-color{
+  border:3px solid $other;
+}
 
 @import 'main';
 @import 'single-shopList';

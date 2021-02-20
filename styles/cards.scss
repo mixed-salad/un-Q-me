@@ -1,4 +1,17 @@
-.card {
+
+
+
+.card,
+.card-rewe,
+.card-edeka,
+.card-dm,
+.card-rossmann,
+.card-alnatura,
+.card-bioCompany,
+.card-lidl,
+.card-penny,
+.card-aldi,
+.card-other {
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -12,8 +25,57 @@
   border-radius: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
-  border: 3px solid $logoorange;
 }
+
+.card{
+  border: 3px solid $logoorange;
+  background-color: $lightorange
+}
+.rewe{
+  border:3px solid $rewe;
+  background-color: $lightrewe
+}
+.edeka{
+  border:3px solid $edeka;
+  background-color: $lightedeka
+}
+.dm{
+  border:3px solid $dm;
+  background-color: $lightdm
+}
+.rossmann{
+  border:3px solid $rossmann;
+  background-color: $lightrossmann
+}
+.alnatura{
+  border:3px solid $alnatura;
+  background-color: $lightalnatura
+}
+.bioCompany{
+  border:3px solid $bioCompany;
+  background-color: $lightbioCompany
+}
+.lidl{
+  border:3px solid $lidl;
+  background-color: $lightlidl
+}
+.penny{
+  border:3px solid $penny;
+  background-color: $lightpenny
+}
+.aldi{
+  border:3px solid $aldi;
+  background-color: $lightaldi
+}
+.other{
+  border:3px solid $other;
+  background-color: $lightother
+}
+
+
+
+
+
 
 .card > hr {
   margin-right: 0;
@@ -159,9 +221,7 @@
   }
 }
 
-.card-group > .card {
-  margin-bottom: 100px;
-}
+
 
 @media (min-width: 576px) {
   .card-group {
@@ -173,7 +233,6 @@
   .card-group > .card {
     -ms-flex: 1 0 0%;
     flex: 1 0 0%;
-    margin-bottom: 0;
   }
   .card-group > .card + .card {
     margin-left: 0;

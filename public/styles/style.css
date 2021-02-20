@@ -135,6 +135,48 @@ section {
   border: 2px solid #d69108 !important;
 }
 
+.rewe-color {
+  border: 3px solid #a51919;
+  background-color: #a51919;
+  border-radius: 60% 10% / 10% 60%;
+}
+
+.edeka-color {
+  border: 3px solid rgba(226, 187, 12, 0.431);
+}
+
+.dm-color {
+  border: 3px solid #3e4af8;
+}
+
+.rossmann-color {
+  border: 3px solid #750000;
+}
+
+.alnatura-color {
+  border: 3px solid #3f8d00;
+}
+
+.bioCompany-color {
+  border: 3px solid #00804f;
+}
+
+.lidl-color {
+  border: 3px solid #1205cf;
+}
+
+.penny-color {
+  border: 3px solid #dd8d0c;
+}
+
+.aldi-color {
+  border: 3px solid #40d0fb;
+}
+
+.other-color {
+  border: 3px solid #323232;
+}
+
 .two-column-secction,
 .two-column-secction-shoplist {
   display: flex;
@@ -352,7 +394,17 @@ input[type="file"] {
   text-transform: capitalize;
 }
 
-.card {
+.card,
+.card-rewe,
+.card-edeka,
+.card-dm,
+.card-rossmann,
+.card-alnatura,
+.card-bioCompany,
+.card-lidl,
+.card-penny,
+.card-aldi,
+.card-other {
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -366,7 +418,61 @@ input[type="file"] {
   border-radius: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+}
+
+.card {
   border: 3px solid #ecad30;
+  background-color: #efc167;
+}
+
+.rewe {
+  border: 3px solid #a51919;
+  background-color: #f6bbbb;
+}
+
+.edeka {
+  border: 3px solid rgba(226, 187, 12, 0.431);
+  background-color: #f5ebc2;
+}
+
+.dm {
+  border: 3px solid #3e4af8;
+  background-color: #bfc2f8;
+}
+
+.rossmann {
+  border: 3px solid #750000;
+  background-color: #b18888;
+}
+
+.alnatura {
+  border: 3px solid #3f8d00;
+  background-color: #edffdd;
+}
+
+.bioCompany {
+  border: 3px solid #00804f;
+  background-color: #c7ffea;
+}
+
+.lidl {
+  border: 3px solid #1205cf;
+  background-color: #aac7f6;
+}
+
+.penny {
+  border: 3px solid #dd8d0c;
+  background-color: #ffeac8;
+}
+
+.aldi {
+  border: 3px solid #40d0fb;
+  background-color: #bceefd;
+}
+
+.other {
+  border: 3px solid #323232;
+  background-color: #cecece;
 }
 
 .card > hr {
@@ -513,10 +619,6 @@ input[type="file"] {
   }
 }
 
-.card-group > .card {
-  margin-bottom: 100px;
-}
-
 @media (min-width: 576px) {
   .card-group {
     display: -ms-flexbox;
@@ -527,7 +629,6 @@ input[type="file"] {
   .card-group > .card {
     -ms-flex: 1 0 0%;
     flex: 1 0 0%;
-    margin-bottom: 0;
   }
   .card-group > .card + .card {
     margin-left: 0;

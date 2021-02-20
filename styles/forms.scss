@@ -23,7 +23,8 @@ input:not([type='radio']),
 input:not([type='range']),
 textarea,
 select,
-.btn-form {
+.btn-form,
+ {
     font: inherit;
     color: inherit;
     border: 2px solid white;
@@ -42,6 +43,7 @@ select,
 .btn-form{
     margin-bottom:10px
 }
+
 
 select,
 textarea,
