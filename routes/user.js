@@ -43,7 +43,8 @@ router.get('/:id', routeGuard, (req, res, next) => {
     .then(() => {
       return List.find({
         helper: id
-      });
+      })
+      .populate('creator');
     })
     .then((lists) => {
       helpingLists = lists;
@@ -138,9 +139,6 @@ router.post('/:id/delete', routeGuard, (req, res, next) => {
   .then((user)=>{
     //console.log(user.createdLists);
     if (user.createdLists.length > 0){
-      console.log(user.createdLists);
-      console.log(user.createdLists[4].toString());
-      let listId = user.createdLists[4].toString()
       return List.updateMany(
         {"_id":{ $in: user.createdLists }},
         {"active":false}
