@@ -50,12 +50,13 @@ router.post(
         })
       })
       .then(user => {
-        if (user.active === true) {
-          throw new Error('There is already a user with that email.');
-        } else if(user.active === false){
-          throw new Error('There is an disactivated account with that email.');
-        }else
-        {
+        if (user){
+          if (user.active === true) {
+            throw new Error('There is already a user with that email.');
+          } else if(user.active === false){
+            throw new Error('There is an desactivated account with that email.');
+          }
+        }else{
           // If there isn't a user with that email in the database
           // we want to go ahead and hash the inserted password
           return bcryptjs
