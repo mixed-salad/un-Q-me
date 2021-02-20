@@ -80,7 +80,11 @@
 
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title">{{ storeName }}</h1>
+                {{#if otherName}}
+                    <h1 class="card-title">{{ otherName }}</h3>
+                {{else}}
+                    <h1 class="card-title">{{ storeName }}</h3>
+                {{/if}}
                 <article class="card-text">
                     <p>Zip code: {{ creator.addressZip }}</p>
                     <p>{{ itemsNeeded }}</p>

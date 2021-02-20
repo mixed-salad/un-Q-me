@@ -1,9 +1,31 @@
 <h1 class="section-title centered-text">Edit the shopping list</h1>
 <div class="create-list">
     <form method="POST">
-        <label class="centered-text" for="input-store">From which store?</label>
-        <input class="centered-text" type="text" id="input-store" name="storeName"
-            placeholder="Edeka, DM, Rewe, Lidl, etc..." value="{{ list.storeName }}" required>
+
+        <label for="input-store" class="centered-text">From another Store?</label>
+        <select name="storeName" id="input-store" onchange="otherSelect(this);">
+            <option value="undefined">--Please choose a store--</option>
+            <option value="rewe">Rewe</option>
+            <option value="edeka">Edeka</option>
+            <option value="dm">DM</option>
+            <option value="rossmann">Rossmann</option>
+            <option value="alnatura">Alnatura</option>
+            <option value="bioCompany">Bio Company</option>
+            <option value="lidl">Lidl</option>
+            <option value="penny">Penny</option>
+            <option value="aldi">Aldi</option>
+            <option value="other">Other</option>
+        </select>
+
+        {{!-- <input type="text" id="input-store" class="centered-text" name="storeName"
+            placeholder="Edeka, DM, Rewe, Lidl, etc..." required> --}}
+        <div id="otherCheck" style="display:none;" class="centered-text">
+            <label for="other-store" class="centered-text">If you selected other store: From which store?</label>
+            <input type="text" id="other-store" class="centered-text" name="otherStore"
+                placeholder="name of other store" value="{{ list.otherName }}">
+
+        </div>
+
 
         <label for="input-items" class="centered-text">What do you need?</label>
         <input class="centered-text" type="text" id="input-items" name="itemsNeeded"
@@ -12,3 +34,21 @@
         <button class="btn-form">Update the list</button>
     </form>
 </div>
+
+<script type="text/javascript">
+    function otherSelect(nameSelect)
+    {
+        if(nameSelect){
+            otherSelectValue = document.getElementById("input-store").value;
+            if(otherSelectValue === "other"){
+                document.getElementById("otherCheck").style.display = "block";
+            }
+            else{
+                document.getElementById("otherCheck").style.display = "none";
+            }
+        }
+        else{
+            document.getElementById("otherCheck").style.display = "none";
+        }
+    }
+</script>

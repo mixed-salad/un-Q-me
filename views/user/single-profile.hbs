@@ -38,7 +38,12 @@
     <a href="/shopList/{{_id}}">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title">{{ storeName }}</h1>
+                
+                {{#if otherName}}
+                    <h1 class="card-title">{{ otherName }}</h3>
+                {{else}}
+                    <h1 class="card-title">{{ storeName }}</h3>
+                {{/if}}
                 <article class="card-text">
                     <p>{{ itemsNeeded }}</p>
                     <small>Created by <a class="created-by" href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{
@@ -50,8 +55,7 @@
                         <p>Status: </p>
                         <span class="status-label status-{{ status }}">{{ status }}</span>
                     </div>
-                    <a class="highlight-wide list-btn btn-form centered-text" href="/shopList/{{ list._id }}/edit">Edit
-                        the list</a>
+
                 </article>
             </div>
         </div>
@@ -68,13 +72,21 @@
     <a href="/shopList/{{_id}}">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title">{{ storeName }}</h1>
+                {{#if otherName}}
+                    <h1 class="card-title">{{ otherName }}</h3>
+                {{else}}
+                    <h1 class="card-title">{{ storeName }}</h3>
+                {{/if}}
                 <article class="card-text">
                     <p>{{ itemsNeeded }}</p>
                     <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date creationDate
                         "DD/MM/YYYY"
                         }}} at {{{ date creationDate "HH:mm" }}}</small>
                     <p>Checkout the <a href="/shoplist/{{ _id }}">shopping list</a></p>
+                    <div class="status">
+                        <p>Status: </p>
+                        <span class="status-label status-{{ status }}">{{ status }}</span>
+                    </div>
 
                 </article>
             </div>

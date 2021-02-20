@@ -24,11 +24,28 @@ router.post('/create', routeGuard, (req, res, next) => {
     status: 'Pending'
   })
     .then((post) => {
-      console.log("creator:"+post.creator)
       listId = post._id
-      return User.findByIdAndUpdate(post.creator, {
-        $push:{createdLists: post._id}
-      })
+      if (data.storeName === "other"){
+        return List.findByIdAndUpdate(post._id, {
+          $set:{otherName: data.otherStore}
+        }).then(()=>{    
+          return User.findByIdAndUpdate(post.creator, {
+            $push:{createdLists: post._id}
+          })
+        }).then(()=>{
+          console.log("creator:"+post.creator)
+        }).catch((error) => {
+          next(error);
+        });
+      }else {
+        return User.findByIdAndUpdate(post.creator, {
+          $push:{createdLists: post._id}
+        }).then(()=>{
+          console.log("creator:"+post.creator)
+        }).catch((error) => {
+          next(error);
+        });
+      }
     })
     .then((user)=>{
       console.log(user)
@@ -152,16 +169,47 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
 router.post('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
-  List.findByIdAndUpdate(id, {
-    storeName: data.storeName,
-    itemsNeeded: data.itemsNeeded
-  })
+  if (data.storeName === undefined){
+    return List.findByIdAndUpdate(id, {
+      itemsNeeded: data.itemsNeeded
+    })
     .then((list) => {
       res.redirect(`/shopList/${id}`);
     })
     .catch((error) => {
       next(error);
     });
+  } else if (data.storeName === "other"){
+    return List.findByIdAndUpdate(id, {
+      storeName: data.storeName,
+      itemsNeeded: data.itemsNeeded
+    }).then(()=>{
+      return List.findByIdAndUpdate(id, {
+        otherName: data.otherStore
+      }).catch((error) => {
+        next(error);
+      });
+    })
+    .then((list) => {
+      res.redirect(`/shopList/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+  }else {
+    console.log(data.storeName)
+    return List.findByIdAndUpdate(id, {
+      storeName: data.storeName,
+      itemsNeeded: data.itemsNeeded,
+      otherName:undefined
+    })
+    .then((list) => {
+      res.redirect(`/shopList/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+  }
 });
 
 router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {

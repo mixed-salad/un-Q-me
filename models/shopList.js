@@ -13,6 +13,10 @@ const schema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  otherName:{
+    type: String,
+    default: undefined
+  },
   itemsNeeded: [{
     type: String,
     required: true

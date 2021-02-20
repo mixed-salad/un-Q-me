@@ -10,8 +10,12 @@
             <p>Status: </p>
             <span class="status-label status-{{ list.status }}">{{ list.status }}</span>
         </div>
-
+        {{#if list.otherName}}
+        <h3 class="centered-text store-name">{{ list.otherName }}</h3>
+        {{else}}
         <h3 class="centered-text store-name">{{ list.storeName }}</h3>
+        {{/if}}
+
         <h4 class="centered-text">{{ list.itemsNeeded }}</h4>
 
         {{#if isVisitor}}
