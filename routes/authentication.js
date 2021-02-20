@@ -44,25 +44,26 @@ router.post(
       .then((result) => {
         latitude = result.data.results[0].geometry.lat;
         langitude = result.data.results[0].geometry.lng;
-        console.log(data.email)
+        console.log(data.email);
         return User.findOne({
           email: data.email
-        })
+        });
       })
-      .then(user => {
-        if (user){
+      .then((user) => {
+        if (user) {
           if (user.active === true) {
             throw new Error('There is already a user with that email.');
-          } else if(user.active === false){
-            throw new Error('There is an desactivated account with that email.');
+          } else if (user.active === false) {
+            throw new Error(
+              'There is an desactivated account with that email.'
+            );
           }
-        }else{
+        } else {
           // If there isn't a user with that email in the database
           // we want to go ahead and hash the inserted password
-          return bcryptjs
-          .hash(data.password, 10)
+          return bcryptjs.hash(data.password, 10);
         }
-        })
+      })
       .then((hash) => {
         return User.create({
           name: data.name,
@@ -93,7 +94,7 @@ router.post(
                 </head>
                 <body>
                 <h1>Hi, ${user.name}! Welcome to unQme</h1>
-                <p>Log in <a target="_blank" href="https://unqme.herokuapp.com/authentication/log-in">here.</a></p>
+                <p>Log in <a target="_blank" href="https://unqme.herokuapp.com/">here.</a></p>
                 </body>        
             </html>
                 `
@@ -107,14 +108,14 @@ router.post(
             console.log('There was an error sending email');
             console.log(error);
           });
-        })
-        .catch((error) => {
-          next(error);
-        })
-    .catch((error) => {
-      next(error);
-    });
-}
+      })
+      .catch((error) => {
+        next(error);
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
 );
 
 router.get('/log-in', (req, res, next) => {
@@ -129,9 +130,9 @@ router.post('/log-in', (req, res, next) => {
       if (!document) {
         return Promise.reject(new Error("There's no user with that email."));
       } else {
-        if (document.active === false){
-          return Promise.reject(new Error("Account was deactivated."));
-        } else{
+        if (document.active === false) {
+          return Promise.reject(new Error('Account was deactivated.'));
+        } else {
           user = document;
           return bcryptjs.compare(data.password, user.passwordHashAndSalt);
         }

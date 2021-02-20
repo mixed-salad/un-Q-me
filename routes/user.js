@@ -87,8 +87,8 @@ router.post(
   (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
-
-    let image = "/images/profile-picture.png";
+    console.log(data)
+    let image
     if (req.file) {
       image = req.file.path;
     }
@@ -110,7 +110,6 @@ router.post(
       .then(() => {
         return User.findByIdAndUpdate(id, {
           name: data.name,
-          profilePicture: image,
           email: data.email,
           // passwordHashAndSalt: hash,
           addressStreet: data.addressStreet,
@@ -124,13 +123,19 @@ router.post(
         });
       })
       .then((user) => {
+        if (image){
+          return User.findByIdAndUpdate(id, {
+            profilePicture: image,
+          })
+        }
+      })
+      .then(()=>{
         res.redirect(`/user/${id}`);
       })
       .catch((error) => {
         next(error);
       });
-  }
-);
+    });
 
 router.post('/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
