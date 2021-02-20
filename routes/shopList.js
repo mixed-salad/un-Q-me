@@ -6,6 +6,7 @@ const routeGuard = require('../middleware/route-guard');
 const transport = require('./../middleware/transport');
 const dotenv = require('dotenv');
 const User = require('../models/user');
+const Message = require('../models/message');
 dotenv.config();
 
 const router = new express.Router();
@@ -255,6 +256,13 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
           .then((result) => {
             console.log('Email was sent');
             console.log(result);
+            Message.create({
+              senderId: req.user._id,
+              receiverId: list.creator._id,
+              messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.helper._id}">${list.helper.name}</a> wants to help you with your <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can chat to talk about the details. </p>`
+            })
+          })
+          .then(()=>{
             res.redirect(`/shopList/${id}`);
           })
           .catch((error) => {
@@ -268,7 +276,6 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
   } else if (status === 'Done') {
     List.findByIdAndUpdate(id, {
       status: status,
-      helper: req.user._id
     })
       .then(() => {
         return List.findById(id).populate('creator').populate('helper');
@@ -295,6 +302,13 @@ router.post('/:id/changestatus/:status', routeGuard, (req, res, next) => {
           .then((result) => {
             console.log('Email was sent');
             console.log(result);
+            Message.create({
+              senderId: req.user._id,
+              receiverId: list.helper._id,
+              messageBody: `<p><a class="message-link" href="http://localhost:3000/user/${list.creator._id}">${list.creator.name}</a> wants to thank you for your help with this <a class="message-link" href="http://localhost:3000/shopList/${list._id}">shopping list</a> in ${list.storeName}. Here you can keep on touch. </p>`
+            })
+          })
+          .then(()=>{
             res.redirect(`/shopList/${id}`);
           })
           .catch((error) => {
