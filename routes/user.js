@@ -35,7 +35,8 @@ router.get('/:id', routeGuard, (req, res, next) => {
     .then(() => {
       return List.find({
         creator: id
-      });
+      })
+      .populate('creator');
     })
     .then((lists) => {
       postedLists = lists;

@@ -53,3 +53,9 @@
 .store-name:first-letter {
   text-transform: capitalize;
 }
+
+.btn-message {
+  width: 50%;
+  margin: 0 auto;
+  border: $logoorange 3px solid;
+}

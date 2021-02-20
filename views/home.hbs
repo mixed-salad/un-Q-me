@@ -42,47 +42,47 @@
 
     for (let user of users) {
 
-        
-        if (user.createdLists.length > 0){
+
+        if (user.createdLists.length > 0) {
             let x = 0
             let storeNameVar = new String()
-            for (list of user.createdLists){
-                if (list.active){
-                    if (x===0){
+            for (list of user.createdLists) {
+                if (list.active) {
+                    if (x === 0) {
                         var circle = L.circle([user.lat, user.lng], {
                             color: '#f03',
                             fillColor: '#f03',
                             fillOpacity: 0.4,
                             radius: 200
                         }).addTo(mymap);
-                        
-                        if (list.storeName === "other"){
-                            if (list.otherName === undefined){
+
+                        if (list.storeName === "other") {
+                            if (list.otherName === undefined) {
                                 storeNameVar = "Other"
-                            } else{
+                            } else {
                                 storeNameVar = list.otherName
                             }
                         } else {
                             storeNameVar = list.storeName
 
                         }
-                        userText=`  <h4> ${user.name}'s Lists </h4>
+                        userText = `  <h4> ${user.name}'s Lists </h4>
                                     <p><b>${storeNameVar}</b> <a href="/shoplist/${list._id}">Check the list</a></p>
                                     `
-                    } else{
-                        if (list.storeName === "other"){
-                            if (list.otherName === undefined){
+                    } else {
+                        if (list.storeName === "other") {
+                            if (list.otherName === undefined) {
                                 storeNameVar = "Other"
-                            } else{
+                            } else {
                                 storeNameVar = list.otherName
                             }
                         } else {
                             storeNameVar = list.storeName
 
                         }
-                        userText=userText.concat(`<p><b>${storeNameVar}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
+                        userText = userText.concat(`<p><b>${storeNameVar}</b> <a href="/shoplist/${list._id}">Check the list</a></p>`)
                     }
-                    x= x+1
+                    x = x + 1
                 }
 
             }
@@ -103,27 +103,28 @@
         <div class="card {{storeName}}">
             <div class="card-body">
                 {{#if otherName}}
-                    <h1 class="card-title">{{ otherName }}</h3>
-                {{else}}
+                <h1 class="card-title">{{ otherName }}</h3>
+                    {{else}}
                     <h1 class="card-title">{{ storeName }}</h3>
-                {{/if}}
-                <article class="card-text">
-                    <p>Zip code: {{ creator.addressZip }}</p>
-                    <p>{{ itemsNeeded }}</p>
-                    <small>Created by <a href="/user/{{ creator._id }}">{{ creator.name }}</a> on {{{ date
-                        creationDate
-                        "DD/MM/YYYY"
-                        }}} at {{{ date creationDate "HH:mm" }}}</small>
-                    <div class="status">
-                        <p>Status: </p>
-                        <span class="status-label status-{{ status }}">{{ status }}</span>
+                        {{/if}}
+                        <article class="card-text">
+                            <p>Zip code: {{ creator.addressZip }}</p>
+                            <p>{{ itemsNeeded }}</p>
+                            <small>Created by <a class="message-link" href="/user/{{ creator._id }}">{{ creator.name
+                                    }}</a> on {{{ date
+                                creationDate
+                                "DD/MM/YYYY"
+                                }}} at {{{ date creationDate "HH:mm" }}}</small>
+                            <div class="status">
+                                <p>Status: </p>
+                                <span class="status-label status-{{ status }}">{{ status }}</span>
 
-                    </div>
-                </article>
+                            </div>
+                        </article>
             </div>
         </div>
     </a>
     {{/if}}
-    
+
     {{/each}}
 </div>

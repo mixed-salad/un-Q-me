@@ -394,6 +394,12 @@ input[type="file"] {
   text-transform: capitalize;
 }
 
+.btn-message {
+  width: 50%;
+  margin: 0 auto;
+  border: #ecad30 3px solid;
+}
+
 .card,
 .card-rewe,
 .card-edeka,
