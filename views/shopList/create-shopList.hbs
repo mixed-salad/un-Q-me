@@ -3,7 +3,7 @@
     <form method="POST">
 
         <label for="input-store" class="centered-text">From which store?</label>
-        <select name="storeName" id="input-store" onchange="otherSelect(this);"required>
+        <select name="storeName" id="input-store" onchange="otherSelect(this);" required>
             <option value="">--Please choose a store--</option>
             <option value="rewe">Rewe</option>
             <option value="edeka">Edeka</option>
@@ -35,18 +35,17 @@
 </div>
 
 <script type="text/javascript">
-    function otherSelect(nameSelect)
-    {
-        if(nameSelect){
+    function otherSelect(nameSelect) {
+        if (nameSelect) {
             otherSelectValue = document.getElementById("input-store").value;
-            if(otherSelectValue === "other"){
+            if (otherSelectValue === "other") {
                 document.getElementById("otherCheck").style.display = "block";
             }
-            else{
+            else {
                 document.getElementById("otherCheck").style.display = "none";
             }
         }
-        else{
+        else {
             document.getElementById("otherCheck").style.display = "none";
         }
     }
